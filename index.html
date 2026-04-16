@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AE Soluciones Inmobiliarias</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black: #0a0a0a;
+      --gray-900: #111111;
+      --gray-800: #1a1a1a;
+      --gray-700: #2a2a2a;
+      --gray-600: #3a3a3a;
+      --gray-500: #555555;
+      --gray-400: #888888;
+      --gray-300: #aaaaaa;
+      --gray-200: #cccccc;
+      --gray-100: #e8e8e8;
+      --gray-50: #f4f4f4;
+      --white: #ffffff;
+      --accent: #c9a96e;
+      --accent-light: #e8d5b0;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Outfit',sans-serif;
+      background:var(--gray-50);
+      color:var(--gray-800);
+      min-height:100vh;
+    }
+ 
+    /* ─── HEADER ─── */
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 32px;height:70px;
+      background:var(--black);
+      position:sticky;top:0;z-index:1200;
+      border-bottom:1px solid var(--gray-700);
+    }
+    .logo-area{display:flex;align-items:center;gap:14px}
+    .logo-img{
+      height:44px;width:44px;object-fit:contain;
+      filter:brightness(0) invert(1);
+    }
+    .logo-text{
+      font-family:'Cormorant Garamond',serif;
+      font-size:17px;font-weight:500;letter-spacing:2px;
+      color:var(--white);text-transform:uppercase;line-height:1.2;
+    }
+    .logo-text span{display:block;font-size:10px;letter-spacing:4px;color:var(--gray-300);font-weight:300}
+    .hamburger{
+      background:transparent;border:1px solid var(--gray-600);
+      color:var(--white);padding:8px 12px;border-radius:6px;cursor:pointer;
+      font-size:16px;transition:all .2s;
+    }
+    .hamburger:hover{border-color:var(--accent);color:var(--accent)}
+ 
+    /* ─── DRAWER ─── */
+    .drawer{
+      position:fixed;left:0;top:0;bottom:0;width:280px;
+      background:var(--gray-900);
+      box-shadow:4px 0 30px rgba(0,0,0,0.5);
+      transform:translateX(-110%);transition:transform .28s ease;
+      padding:24px 20px;z-index:1300;
+      border-right:1px solid var(--gray-700);
+    }
+    .drawer.open{transform:translateX(0)}
+    .drawer-logo{
+      font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;
+      color:var(--white);margin-bottom:24px;letter-spacing:1px;
+    }
+    .drawer hr{border:none;border-top:1px solid var(--gray-700);margin:16px 0}
+    .drawer button{
+      width:100%;padding:10px 14px;border-radius:6px;border:none;
+      background:transparent;color:var(--gray-200);
+      text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;
+      font-size:14px;font-weight:400;transition:all .15s;
+      margin-bottom:4px;
+    }
+    .drawer button:hover{background:var(--gray-700);color:var(--white)}
+    .drawer .small{font-size:11px;color:var(--gray-500);margin-top:8px}
+ 
+    /* overlay */
+    .overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,0.6);
+      opacity:0;pointer-events:none;transition:opacity .2s;z-index:1100;
+    }
+    .overlay.show{opacity:1;pointer-events:auto}
+ 
+    /* ─── HERO / TABS SECTION ─── */
+    .hero{
+      background:var(--black);
+      padding:60px 32px 48px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 80% 60% at 50% 120%, rgba(201,169,110,0.08) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .hero-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(36px,5vw,64px);font-weight:300;
+      color:var(--white);letter-spacing:3px;
+      line-height:1.1;margin-bottom:12px;
+    }
+    .hero-sub{
+      font-size:13px;letter-spacing:4px;text-transform:uppercase;
+      color:var(--gray-400);margin-bottom:36px;font-weight:300;
+    }
+    /* Tab buttons */
+    .tab-row{
+      display:inline-flex;gap:0;border:1px solid var(--gray-600);border-radius:8px;overflow:hidden;
+      margin-bottom:0;
+    }
+    .tab-btn{
+      padding:12px 36px;border:none;cursor:pointer;font-family:'Outfit',sans-serif;
+      font-size:14px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
+      transition:all .2s;background:transparent;color:var(--gray-300);
+    }
+    .tab-btn.active{background:var(--accent);color:var(--black)}
+    .tab-btn:not(.active):hover{background:var(--gray-700);color:var(--white)}
+    .tab-divider{width:1px;background:var(--gray-600)}
+ 
+    /* ─── MAIN CONTENT ─── */
+    main{max-width:1280px;margin:0 auto;padding:32px 24px}
+ 
+    /* ─── FILTER BAR ─── */
+    .filter-bar{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:24px;gap:12px;flex-wrap:wrap;
+    }
+    .results-label{
+      font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;
+      color:var(--gray-800);
+    }
+    .results-label span{color:var(--gray-400);font-size:16px}
+    .filter-toggle-btn{
+      display:flex;align-items:center;gap:8px;
+      padding:10px 20px;border-radius:8px;border:1px solid var(--gray-200);
+      background:var(--white);color:var(--gray-700);cursor:pointer;
+      font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;
+      transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.06);
+    }
+    .filter-toggle-btn:hover{border-color:var(--gray-500);background:var(--gray-50)}
+    .filter-icon{font-size:16px}
+ 
+    /* Filter panel slide */
+    .filter-panel{
+      background:var(--white);border:1px solid var(--gray-100);border-radius:12px;
+      padding:24px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06);
+      display:none;
+    }
+    .filter-panel.open{display:block}
+    .filter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+    .filter-field label{
+      display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;
+      text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;
+    }
+    .filter-field input,.filter-field select{
+      width:100%;padding:9px 12px;border-radius:7px;
+      border:1px solid var(--gray-200);font-family:'Outfit',sans-serif;
+      font-size:13px;color:var(--gray-800);background:var(--gray-50);
+      outline:none;transition:border .15s;
+    }
+    .filter-field input:focus,.filter-field select:focus{border-color:var(--gray-500);background:var(--white)}
+    .filter-apply{
+      margin-top:16px;padding:10px 28px;border-radius:7px;border:none;
+      background:var(--black);color:var(--white);cursor:pointer;
+      font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;
+      letter-spacing:1px;text-transform:uppercase;transition:background .2s;
+    }
+    .filter-apply:hover{background:var(--gray-700)}
+ 
+    /* ─── LAYOUT: listings + map ─── */
+    .content-grid{
+      display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:start;
+    }
+ 
+    /* ─── PROPERTY CARDS ─── */
+    .listings{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .prop-card{
+      background:var(--white);border-radius:12px;overflow:hidden;
+      border:1px solid var(--gray-100);
+      box-shadow:0 2px 12px rgba(0,0,0,0.05);
+      transition:transform .2s,box-shadow .2s;cursor:pointer;
+    }
+    .prop-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.1)}
+    .prop-img-wrap{position:relative;height:180px;overflow:hidden;background:var(--gray-100)}
+    .prop-img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+    .prop-card:hover .prop-img{transform:scale(1.04)}
+    .prop-badge{
+      position:absolute;top:10px;left:10px;
+      padding:4px 10px;border-radius:5px;font-size:11px;font-weight:600;
+      letter-spacing:1px;text-transform:uppercase;
+    }
+    .badge-venta{background:var(--black);color:var(--white)}
+    .badge-arriendo{background:var(--accent);color:var(--black)}
+    .badge-vendida{background:var(--gray-400);color:var(--white)}
+    .prop-body{padding:14px 16px 16px}
+    .prop-type{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-400);margin-bottom:4px}
+    .prop-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--gray-900);margin-bottom:4px;line-height:1.3}
+    .prop-location{font-size:12px;color:var(--gray-400);display:flex;align-items:center;gap:4px;margin-bottom:10px}
+    .prop-price{font-size:17px;font-weight:600;color:var(--gray-900);margin-bottom:12px}
+    .prop-actions{display:flex;gap:8px}
+    .btn-ver{
+      flex:1;padding:8px;border-radius:7px;border:1px solid var(--gray-200);
+      background:transparent;color:var(--gray-700);cursor:pointer;
+      font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;
+      transition:all .15s;
+    }
+    .btn-ver:hover{background:var(--black);color:var(--white);border-color:var(--black)}
+    .btn-contact{
+      flex:1;padding:8px;border-radius:7px;border:1px solid var(--black);
+      background:var(--black);color:var(--white);cursor:pointer;
+      font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;
+      transition:all .15s;
+    }
+    .btn-contact:hover{background:var(--gray-700)}
+ 
+    /* ─── MAP PANEL ─── */
+    .map-panel{
+      background:var(--white);border-radius:12px;overflow:hidden;
+      border:1px solid var(--gray-100);
+      box-shadow:0 2px 12px rgba(0,0,0,0.05);
+      position:sticky;top:90px;
+    }
+    .map-header{
+      padding:14px 16px;border-bottom:1px solid var(--gray-100);
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .map-header-title{
+      font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gray-900);
+    }
+    #map{height:480px;width:100%;z-index:1}
+ 
+    /* Property popup card on map */
+    .map-prop-popup{
+      position:absolute;z-index:500;
+      background:var(--white);border-radius:10px;
+      box-shadow:0 8px 30px rgba(0,0,0,0.18);
+      width:220px;pointer-events:auto;
+      border:1px solid var(--gray-100);
+      overflow:hidden;transform:translateX(-50%) translateY(-110%);
+      transition:opacity .2s;
+    }
+    .map-prop-popup img{width:100%;height:110px;object-fit:cover}
+    .map-prop-popup .popup-body{padding:10px 12px 12px}
+    .map-prop-popup .popup-title{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--gray-900);margin-bottom:2px}
+    .map-prop-popup .popup-price{font-size:13px;font-weight:600;color:var(--gray-800);margin-bottom:8px}
+    .map-prop-popup .popup-btn{
+      width:100%;padding:6px;border-radius:5px;border:none;
+      background:var(--black);color:var(--white);cursor:pointer;
+      font-size:11px;font-weight:500;
+    }
+    .popup-arrow{
+      position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:0;height:0;
+      border-left:8px solid transparent;border-right:8px solid transparent;
+      border-top:8px solid var(--white);
+      filter:drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+    }
+    .leaflet-pane,.leaflet-top,.leaflet-bottom{z-index:1 !important}
+ 
+    /* ─── MODAL ─── */
+    .modal{
+      position:fixed;left:50%;top:50%;
+      transform:translate(-50%,-50%) scale(.97);
+      background:var(--white);border-radius:14px;
+      box-shadow:0 24px 70px rgba(0,0,0,0.2);
+      z-index:1400;width:94%;max-width:680px;
+      opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;
+      max-height:90vh;overflow-y:auto;
+    }
+    .modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+    .modal-header{
+      padding:24px 24px 0;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .modal-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--gray-900)}
+    .modal-close{
+      width:32px;height:32px;border-radius:50%;border:1px solid var(--gray-200);
+      background:transparent;cursor:pointer;font-size:16px;color:var(--gray-500);
+      display:flex;align-items:center;justify-content:center;transition:all .15s;
+    }
+    .modal-close:hover{background:var(--gray-100);color:var(--gray-900)}
+    .modal-body{padding:20px 24px 24px}
+ 
+    /* ─── EMPTY STATE ─── */
+    .empty-state{
+      grid-column:1/-1;text-align:center;padding:60px 20px;
+      color:var(--gray-400);
+    }
+    .empty-state .empty-icon{font-size:40px;margin-bottom:12px}
+    .empty-state p{font-family:'Cormorant Garamond',serif;font-size:20px}
+ 
+    /* ─── SECTION ─── */
+    .section{display:none}
+    .section.active{display:block}
+ 
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:900px){
+      .content-grid{grid-template-columns:1fr}
+      .map-panel{position:static;margin-top:0}
+      #map{height:260px}
+      header{padding:0 16px}
+      main{padding:20px 16px}
+      .hero{padding:40px 16px 32px}
+    }
+ 
+    /* Leaflet popup override */
+    .leaflet-popup-content-wrapper{
+      border-radius:10px !important;padding:0 !important;overflow:hidden;
+    }
+    .leaflet-popup-content{margin:0 !important;width:auto !important}
+    .leaflet-popup-tip-container{display:none}
+ 
+    /* Custom marker */
+    .custom-marker{
+      background:var(--black);color:var(--white);
+      padding:4px 8px;border-radius:6px;
+      font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;
+      white-space:nowrap;border:2px solid var(--white);
+      box-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer;
+    }
+    .custom-marker::after{
+      content:'';display:block;width:6px;height:6px;
+      background:var(--black);border-bottom:2px solid var(--white);border-right:2px solid var(--white);
+      transform:rotate(45deg);margin:-3px auto 0;
+    }
+  </style>
+</head>
+<body>
+ 
+  <header>
+    <div class="logo-area">
+      <button class="hamburger" id="openMenu">☰</button>
+      <img class="logo-img" id="logoImg" src="" alt="AE Logo" />
+      <div class="logo-text">
+        AE Soluciones
+        <span>Inmobiliarias</span>
+      </div>
+    </div>
+  </header>
+ 
+  <div class="drawer" id="drawer">
+    <div class="drawer-logo">AE Soluciones</div>
+    <hr/>
+    <button onclick="showSection('home'); setTab('todos')">🏠 Todas las propiedades</button>
+    <button onclick="showSection('home'); setTab('venta')">📋 En Venta</button>
+    <button onclick="showSection('home'); setTab('arriendo')">🔑 En Arriendo</button>
+    <hr/>
+    <div class="small">© 2025 AE Soluciones Inmobiliarias</div>
+  </div>
+  <div class="overlay" id="overlay"></div>
+ 
+  <!-- HERO -->
+  <div class="hero" id="heroSection">
+    <h1 class="hero-title">Encontrá tu hogar<br>ideal</h1>
+    <p class="hero-sub">Propiedades exclusivas · Colombia</p>
+    <div class="tab-row">
+      <button class="tab-btn active" id="tab-todos" onclick="setTab('todos')">Todos</button>
+      <div class="tab-divider"></div>
+      <button class="tab-btn" id="tab-venta" onclick="setTab('venta')">Venta</button>
+      <div class="tab-divider"></div>
+      <button class="tab-btn" id="tab-arriendo" onclick="setTab('arriendo')">Arriendo</button>
+    </div>
+  </div>
+ 
+  <main>
+    <!-- HOME SECTION -->
+    <section id="home" class="section active">
+ 
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <div class="results-label">
+          Propiedades <span id="totalCountLabel"></span>
+        </div>
+        <button class="filter-toggle-btn" id="filterToggle">
+          <span class="filter-icon">⚙</span> Filtros
+        </button>
+      </div>
+ 
+      <!-- Filter panel (hidden by default) -->
+      <div class="filter-panel" id="filterPanel">
+        <div class="filter-grid">
+          <div class="filter-field">
+            <label>Ubicación</label>
+            <input id="qLocation" placeholder="Ciudad o dirección" />
+          </div>
+          <div class="filter-field">
+            <label>Tipo</label>
+            <select id="qType">
+              <option value="">Todos</option>
+              <option>Casa</option>
+              <option>Apartamento</option>
+              <option>Lote</option>
+              <option>Finca</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label>Precio mínimo</label>
+            <input id="minPrice" placeholder="ej: 100000000" type="number" />
+          </div>
+          <div class="filter-field">
+            <label>Precio máximo</label>
+            <input id="maxPrice" placeholder="ej: 500000000" type="number" />
+          </div>
+          <div class="filter-field">
+            <label>Ordenar por</label>
+            <select id="sort">
+              <option value="new">Más recientes</option>
+              <option value="priceAsc">Precio: menor a mayor</option>
+              <option value="priceDesc">Precio: mayor a menor</option>
+            </select>
+          </div>
+        </div>
+        <button class="filter-apply" id="apply">Aplicar filtros</button>
+      </div>
+ 
+      <!-- Grid: listings + map -->
+      <div class="content-grid">
+        <div class="listings" id="listings">
+          <!-- cards rendered by JS -->
+        </div>
+        <div class="map-panel">
+          <div class="map-header">
+            <div class="map-header-title">Mapa de propiedades</div>
+            <div style="font-size:12px;color:var(--gray-400)" id="mapCountLabel"></div>
+          </div>
+          <div id="map"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+ 
+  <!-- PROPERTY MODAL -->
+  <div id="propModal" class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="propModalTitle">Propiedad</div>
+      <button class="modal-close" onclick="closePropModal()">✕</button>
+    </div>
+    <div class="modal-body" id="propModalBody"></div>
+  </div>
+ 
+  <!-- CONTACT MODAL -->
+  <div id="contactModal" class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Contactar</div>
+      <button class="modal-close" onclick="hideModals()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--gray-500);margin-bottom:16px;font-size:14px">Nos pondremos en contacto contigo pronto para coordinar una visita.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:8px">
+          <input id="c_name" placeholder="Tu nombre" style="flex:1;padding:10px 12px;border:1px solid var(--gray-200);border-radius:8px;font-family:Outfit,sans-serif;font-size:13px;outline:none"/>
+          <input id="c_phone" placeholder="Teléfono" style="flex:1;padding:10px 12px;border:1px solid var(--gray-200);border-radius:8px;font-family:Outfit,sans-serif;font-size:13px;outline:none"/>
+        </div>
+        <button onclick="sendContact()" style="padding:12px;border-radius:8px;border:none;background:var(--black);color:var(--white);font-family:Outfit,sans-serif;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:1px">
+          ENVIAR SOLICITUD
+        </button>
+      </div>
+    </div>
+  </div>
+ 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // ── Logo as base64 from uploaded image ──
+    // We'll use an inline SVG representation of the AE logo
+    const LOGO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text x="10" y="80" font-family="serif" font-size="90" font-weight="700" fill="white">Æ</text></svg>`;
+    document.getElementById('logoImg').src = LOGO_SVG;
+ 
+    const PROPS_KEY = 'inmobiliaria_props_v2';
+ 
+    function load(key){ try{ return JSON.parse(localStorage.getItem(key)||'[]') }catch(e){ return [] } }
+    function save(key,val){ localStorage.setItem(key,JSON.stringify(val)) }
+    function formatCOP(n){ if(!n) return '—'; return '$' + Number(n).toLocaleString('es-CO') + ' COP' }
+ 
+    // ── Drawer ──
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    document.getElementById('openMenu').addEventListener('click',()=>{ drawer.classList.add('open'); overlay.classList.add('show'); });
+    overlay.addEventListener('click',()=>{ drawer.classList.remove('open'); overlay.classList.remove('show'); hideModals(); });
+ 
+    function showSection(id){
+      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+      const el = document.getElementById(id);
+      if(el) el.classList.add('active');
+      drawer.classList.remove('open'); overlay.classList.remove('show');
+      setTimeout(()=>{ if(window.mapObj) mapObj.invalidateSize(); },200);
+    }
+ 
+    // ── Tabs ──
+    let currentTab = 'todos';
+    function setTab(tab){
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      const el = document.getElementById('tab-'+tab);
+      if(el) el.classList.add('active');
+      showSection('home');
+      applyFilters();
+    }
+ 
+    // ── Filter toggle ──
+    document.getElementById('filterToggle').addEventListener('click',()=>{
+      document.getElementById('filterPanel').classList.toggle('open');
+    });
+    document.getElementById('apply').addEventListener('click', applyFilters);
+ 
+    // ── Map ──
+    const mapObj = L.map('map',{zoomControl:true}).setView([4.7110,-74.0721],6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mapObj);
+    let markersGroup = L.layerGroup().addTo(mapObj);
+ 
+    function renderMarkers(props){
+      markersGroup.clearLayers();
+      document.getElementById('mapCountLabel').textContent = props.filter(p=>p.lat&&p.lng).length + ' ubicadas';
+      props.forEach(p=>{
+        if(!p.lat || !p.lng) return;
+        const priceShort = p.price >= 1000000000
+          ? (p.price/1000000000).toFixed(1)+'B'
+          : p.price >= 1000000
+            ? Math.round(p.price/1000000)+'M'
+            : formatCOP(p.price);
+ 
+        const icon = L.divIcon({
+          className:'',
+          html:`<div class="custom-marker">${priceShort}</div>`,
+          iconAnchor:[0,28],
+        });
+        const marker = L.marker([p.lat,p.lng],{icon}).addTo(markersGroup);
+ 
+        // popup with photo card
+        const imgSrc = p.images && p.images[0] ? p.images[0] : '';
+        const imgHtml = imgSrc
+          ? `<img src="${imgSrc}" style="width:100%;height:100px;object-fit:cover"/>`
+          : `<div style="width:100%;height:60px;background:#f3f3f3;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px">Sin foto</div>`;
+ 
+        marker.bindPopup(`
+          <div style="width:200px;font-family:Outfit,sans-serif;">
+            ${imgHtml}
+            <div style="padding:10px">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:#111;margin-bottom:2px">${p.title}</div>
+              <div style="font-size:12px;color:#888;margin-bottom:6px">📍 ${p.location}</div>
+              <div style="font-size:14px;font-weight:600;color:#111;margin-bottom:8px">${formatCOP(p.price)}</div>
+              <button onclick="openPropById('${p.id}')" style="width:100%;padding:7px;border-radius:6px;border:none;background:#0a0a0a;color:white;font-size:12px;font-weight:500;cursor:pointer;">Ver propiedad →</button>
+            </div>
+          </div>
+        `,{maxWidth:220,minWidth:200});
+      });
+    }
+ 
+    // ── Render listings ──
+    function renderListings(props){
+      const container = document.getElementById('listings');
+      container.innerHTML='';
+      document.getElementById('totalCountLabel').textContent = '— ' + props.length + ' resultado' + (props.length!==1?'s':'');
+ 
+      if(!props.length){
+        container.innerHTML=`<div class="empty-state"><div class="empty-icon">🏡</div><p>No hay propiedades disponibles</p></div>`;
+        return;
+      }
+ 
+      props.forEach(p=>{
+        const div = document.createElement('div');
+        div.className='prop-card';
+        const imgsrc = p.images && p.images[0]
+          ? p.images[0]
+          : `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%25' height='100%25' fill='%23f3f3f3'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23aaa' font-size='14'>Sin foto</text></svg>`;
+ 
+        const modality = p.modality || 'venta';
+        const badgeClass = p.sold ? 'badge-vendida' : (modality === 'arriendo' ? 'badge-arriendo' : 'badge-venta');
+        const badgeText = p.sold ? 'Vendida' : (modality === 'arriendo' ? 'Arriendo' : 'Venta');
+ 
+        div.innerHTML=`
+          <div class="prop-img-wrap">
+            <img class="prop-img" src="${imgsrc}" alt="${p.title}" loading="lazy"/>
+            <div class="prop-badge ${badgeClass}">${badgeText}</div>
+          </div>
+          <div class="prop-body">
+            <div class="prop-type">${p.type||'Propiedad'}</div>
+            <div class="prop-title">${p.title}</div>
+            <div class="prop-location">📍 ${p.location}</div>
+            <div class="prop-price">${formatCOP(p.price)}</div>
+            <div class="prop-actions">
+              <button class="btn-ver" onclick="openPropById('${p.id}')">Ver detalle</button>
+              <button class="btn-contact" onclick="openContact('${p.id}')">Contactar</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+ 
+    // ── Filters ──
+    function applyFilters(){
+      let all = load(PROPS_KEY);
+ 
+      // tab filter
+      if(currentTab === 'venta') all = all.filter(p=>!p.sold && (p.modality||'venta')==='venta');
+      else if(currentTab === 'arriendo') all = all.filter(p=>!p.sold && p.modality==='arriendo');
+ 
+      const qLoc = (document.getElementById('qLocation')?.value||'').toLowerCase();
+      const qType = document.getElementById('qType')?.value||'';
+      const minP = Number(document.getElementById('minPrice')?.value||0);
+      const maxP = Number(document.getElementById('maxPrice')?.value||Infinity);
+ 
+      if(qLoc) all = all.filter(p=>(p.location||'').toLowerCase().includes(qLoc)||(p.title||'').toLowerCase().includes(qLoc));
+      if(qType) all = all.filter(p=>p.type===qType);
+      all = all.filter(p=>Number(p.price||0)>=minP && Number(p.price||0)<=maxP);
+ 
+      const s = document.getElementById('sort')?.value;
+      if(s==='priceAsc') all.sort((a,b)=>a.price-b.price);
+      else if(s==='priceDesc') all.sort((a,b)=>b.price-a.price);
+      else all.sort((a,b)=>b.createdAt-a.createdAt);
+ 
+      renderListings(all);
+      renderMarkers(all);
+    }
+ 
+    // ── Prop modal ──
+    function openPropById(id){
+      const props = load(PROPS_KEY);
+      const p = props.find(x=>x.id===id);
+      if(!p) return;
+ 
+      document.getElementById('propModalTitle').textContent = p.title;
+ 
+      const imgs = p.images && p.images.length
+        ? p.images.map(src=>`<img src="${src}" style="width:100%;max-height:300px;object-fit:cover;border-radius:10px;margin-bottom:12px"/>`).join('')
+        : '';
+ 
+      const modality = p.modality || 'venta';
+      const badgeText = p.sold ? 'Vendida' : (modality==='arriendo' ? 'En Arriendo' : 'En Venta');
+      const badgeColor = p.sold ? '#888' : (modality==='arriendo' ? '#c9a96e' : '#0a0a0a');
+ 
+      document.getElementById('propModalBody').innerHTML = `
+        ${imgs}
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+          <span style="padding:5px 14px;border-radius:20px;background:${badgeColor};color:white;font-size:12px;font-weight:600">${badgeText}</span>
+          <span style="font-size:13px;color:var(--gray-400)">${p.type||''}</span>
+        </div>
+        <div style="font-size:24px;font-weight:600;color:var(--gray-900);margin-bottom:6px">${formatCOP(p.price)}</div>
+        <div style="font-size:14px;color:var(--gray-500);margin-bottom:16px">📍 ${p.location||''}</div>
+        ${p.desc ? `<p style="font-size:14px;color:var(--gray-600);line-height:1.7;margin-bottom:20px">${p.desc}</p>` : ''}
+        ${p.lat && p.lng ? `<div style="font-size:12px;color:var(--gray-400);padding:8px 12px;background:var(--gray-50);border-radius:6px;margin-bottom:16px">🗺 Coordenadas: ${p.lat}, ${p.lng}</div>` : ''}
+        <button onclick="openContact('${p.id}')" style="width:100%;padding:13px;border-radius:8px;border:none;background:var(--black);color:white;font-family:Outfit,sans-serif;font-size:14px;font-weight:500;cursor:pointer;letter-spacing:1px">
+          SOLICITAR INFORMACIÓN
+        </button>
+      `;
+ 
+      showModal(document.getElementById('propModal'));
+      if(p.lat && p.lng) mapObj.setView([p.lat,p.lng],14);
+    }
+ 
+    function closePropModal(){ hideModals() }
+ 
+    // ── Contact ──
+    let contactPropId = null;
+    function openContact(id){
+      contactPropId = id;
+      hideModals();
+      showModal(document.getElementById('contactModal'));
+    }
+    function sendContact(){
+      const name = document.getElementById('c_name').value;
+      const phone = document.getElementById('c_phone').value;
+      if(!name||!phone){ alert('Por favor ingresa nombre y teléfono'); return; }
+      hideModals();
+      // In production: send to backend
+      alert('¡Solicitud enviada! Nos contactaremos con ' + name + ' al ' + phone + ' pronto.');
+      document.getElementById('c_name').value='';
+      document.getElementById('c_phone').value='';
+    }
+    window.sendContact = sendContact;
+ 
+    // ── Modals ──
+    function showModal(el){ el.classList.add('show'); overlay.classList.add('show'); }
+    function hideModals(){ document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show')); overlay.classList.remove('show'); }
+ 
+    window.openPropById = openPropById;
+    window.openContact = openContact;
+ 
+    // ── DEMO DATA ──
+    // Para agregar propiedades edita este array y recarga la página:
+    // modality: 'venta' | 'arriendo'
+    (function initData(){
+      if(load(PROPS_KEY).length === 0){
+        const demo = [
+          {
+            id:'p1', title:'Casa campestre con vista al río',
+            type:'Casa', modality:'venta', price:350000000,
+            location:'Tabio, Cundinamarca', lat:4.9225, lng:-74.1900,
+            images:[], desc:'Hermosa casa con zona BBQ, piscina y amplio jardín. 4 habitaciones, 3 baños. Escritura lista.',
+            createdAt: Date.now()-1000000, sold:false
+          },
+          {
+            id:'p2', title:'Apartamento céntrico Bogotá',
+            type:'Apartamento', modality:'venta', price:210000000,
+            location:'Bogotá, Chapinero', lat:4.6486, lng:-74.0624,
+            images:[], desc:'2 habitaciones, 2 baños. Conjunto cerrado con vigilancia 24h. Parqueadero incluido.',
+            createdAt: Date.now()-2000000, sold:false
+          },
+          {
+            id:'p3', title:'Finca productiva Cundinamarca',
+            type:'Finca', modality:'venta', price:850000000,
+            location:'La Vega, Cundinamarca', lat:4.9972, lng:-74.3487,
+            images:[], desc:'12 hectáreas con cultivos y vivienda principal. Excelente acceso.',
+            createdAt: Date.now()-3000000, sold:false
+          },
+          {
+            id:'p4', title:'Apartamento moderno en arriendo',
+            type:'Apartamento', modality:'arriendo', price:1800000,
+            location:'Bogotá, Usaquén', lat:4.6954, lng:-74.0310,
+            images:[], desc:'Amoblado. 1 habitación estudio. Ideal profesionales. Servicios incluidos.',
+            createdAt: Date.now()-500000, sold:false
+          },
+          {
+            id:'p5', title:'Casa familiar en arriendo',
+            type:'Casa', modality:'arriendo', price:2500000,
+            location:'Chía, Cundinamarca', lat:4.8607, lng:-74.0593,
+            images:[], desc:'3 habitaciones, 2 baños, jardín. Barrio residencial tranquilo.',
+            createdAt: Date.now()-400000, sold:false
+          },
+          {
+            id:'p6', title:'Lote urbanizable Zipaquirá',
+            type:'Lote', modality:'venta', price:180000000,
+            location:'Zipaquirá, Cundinamarca', lat:5.0225, lng:-74.0013,
+            images:[], desc:'500 m². Servicios disponibles. Zona de expansión urbana.',
+            createdAt: Date.now()-600000, sold:false
+          }
+        ];
+        save(PROPS_KEY, demo);
+      }
+      applyFilters();
+    })();
+ 
+    window.addEventListener('load', ()=>{ applyFilters(); });
+ 
+    /*
+    ════════════════════════════════════════════════════════
+    CÓMO AGREGAR PROPIEDADES (solo tú, desde el código)
+    ════════════════════════════════════════════════════════
+ 
+    1. Abre las DevTools del navegador (F12) y ve a la Consola.
+    2. Ejecuta esta función con los datos de la propiedad:
+ 
+    addProperty({
+      title: 'Nombre de la propiedad',
+      type: 'Casa',              // Casa | Apartamento | Lote | Finca | Otro
+      modality: 'venta',         // venta | arriendo
+      price: 300000000,          // precio en COP
+      location: 'Ciudad, Depto',
+      lat: 4.7110,               // latitud (para aparecer en mapa)
+      lng: -74.0721,             // longitud
+      desc: 'Descripción...',
+      images: []                 // array de base64 o URLs de imágenes
+    });
+ 
+    3. La propiedad aparece al instante en la página.
+ 
+    Para usar imágenes, puedes convertirlas a base64 o apuntar a una URL pública.
+    ════════════════════════════════════════════════════════
+    */
+    window.addProperty = function(data){
+      const props = load(PROPS_KEY);
+      const prop = {
+        id: 'p_' + Date.now(),
+        title: data.title || 'Sin título',
+        type: data.type || 'Otro',
+        modality: data.modality || 'venta',
+        price: Number(data.price) || 0,
+        location: data.location || '',
+        lat: data.lat ? parseFloat(data.lat) : null,
+        lng: data.lng ? parseFloat(data.lng) : null,
+        images: data.images || [],
+        desc: data.desc || '',
+        createdAt: Date.now(),
+        sold: false
+      };
+      props.push(prop);
+      save(PROPS_KEY, props);
+      applyFilters();
+      console.log('✅ Propiedad agregada:', prop.title);
+    };
+ 
+    // Also expose deleteProperty and markSold for admin use
+    window.deleteProperty = function(id){
+      const props = load(PROPS_KEY).filter(p=>p.id!==id);
+      save(PROPS_KEY,props);
+      applyFilters();
+      console.log('🗑 Propiedad eliminada:', id);
+    };
+ 
+    window.markSold = function(id){
+      const props = load(PROPS_KEY);
+      const p = props.find(x=>x.id===id);
+      if(!p){ console.log('No encontrada'); return; }
+      p.sold=true; p.soldAt=Date.now();
+      save(PROPS_KEY,props); applyFilters();
+      console.log('✅ Marcada como vendida:', p.title);
+    };
+ 
+    window.listProperties = function(){
+      const props = load(PROPS_KEY);
+      console.table(props.map(p=>({id:p.id,title:p.title,type:p.type,modality:p.modality,price:p.price,location:p.location})));
+    };
+ 
+  </script>
+</body>
+</html>
