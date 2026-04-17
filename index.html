@@ -1,3 +1,6 @@
+Ae soluciones · HTML
+Copy
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -113,10 +116,8 @@
       font-size:13px;letter-spacing:4px;text-transform:uppercase;
       color:var(--gray-400);margin-bottom:36px;font-weight:300;
     }
-    /* Tab buttons */
     .tab-row{
       display:inline-flex;gap:0;border:1px solid var(--gray-600);border-radius:8px;overflow:hidden;
-      margin-bottom:0;
     }
     .tab-btn{
       padding:12px 36px;border:none;cursor:pointer;font-family:'Outfit',sans-serif;
@@ -150,7 +151,6 @@
     .filter-toggle-btn:hover{border-color:var(--gray-500);background:var(--gray-50)}
     .filter-icon{font-size:16px}
  
-    /* Filter panel slide */
     .filter-panel{
       background:var(--white);border:1px solid var(--gray-100);border-radius:12px;
       padding:24px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06);
@@ -215,13 +215,7 @@
       transition:all .15s;
     }
     .btn-ver:hover{background:var(--black);color:var(--white);border-color:var(--black)}
-    .btn-contact{
-      flex:1;padding:8px;border-radius:7px;border:1px solid var(--black);
-      background:var(--black);color:var(--white);cursor:pointer;
-      font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;
-      transition:all .15s;
-    }
-    .btn-contact:hover{background:var(--gray-700)}
+ 
  
     /* ─── MAP PANEL ─── */
     .map-panel{
@@ -237,90 +231,19 @@
     .map-header-title{
       font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gray-900);
     }
-    #map{height:480px;width:100%;z-index:1}
+    #map{width:100%;height:45vh;z-index:1}
+    @media(min-width:900px){#map{height:300px}}
  
-    /* Property popup card on map */
-    .map-prop-popup{
-      position:absolute;z-index:500;
-      background:var(--white);border-radius:10px;
-      box-shadow:0 8px 30px rgba(0,0,0,0.18);
-      width:220px;pointer-events:auto;
-      border:1px solid var(--gray-100);
-      overflow:hidden;transform:translateX(-50%) translateY(-110%);
-      transition:opacity .2s;
+    .whatsapp-float{
+      position:fixed;bottom:20px;right:20px;
+      width:60px;height:60px;border-radius:50%;
+      background:#25D366;border:none;z-index:9999;
+      box-shadow:0 10px 25px rgba(0,0,0,0.2);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;
     }
-    .map-prop-popup img{width:100%;height:110px;object-fit:cover}
-    .map-prop-popup .popup-body{padding:10px 12px 12px}
-    .map-prop-popup .popup-title{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--gray-900);margin-bottom:2px}
-    .map-prop-popup .popup-price{font-size:13px;font-weight:600;color:var(--gray-800);margin-bottom:8px}
-    .map-prop-popup .popup-btn{
-      width:100%;padding:6px;border-radius:5px;border:none;
-      background:var(--black);color:var(--white);cursor:pointer;
-      font-size:11px;font-weight:500;
-    }
-    .popup-arrow{
-      position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
-      width:0;height:0;
-      border-left:8px solid transparent;border-right:8px solid transparent;
-      border-top:8px solid var(--white);
-      filter:drop-shadow(0 2px 3px rgba(0,0,0,0.1));
-    }
+ 
     .leaflet-pane,.leaflet-top,.leaflet-bottom{z-index:1 !important}
  
-    /* ─── MODAL ─── */
-    .modal{
-      position:fixed;left:50%;top:50%;
-      transform:translate(-50%,-50%) scale(.97);
-      background:var(--white);border-radius:14px;
-      box-shadow:0 24px 70px rgba(0,0,0,0.2);
-      z-index:1400;width:94%;max-width:680px;
-      opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;
-      max-height:90vh;overflow-y:auto;
-    }
-    .modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
-    .modal-header{
-      padding:24px 24px 0;
-      display:flex;align-items:center;justify-content:space-between;
-    }
-    .modal-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--gray-900)}
-    .modal-close{
-      width:32px;height:32px;border-radius:50%;border:1px solid var(--gray-200);
-      background:transparent;cursor:pointer;font-size:16px;color:var(--gray-500);
-      display:flex;align-items:center;justify-content:center;transition:all .15s;
-    }
-    .modal-close:hover{background:var(--gray-100);color:var(--gray-900)}
-    .modal-body{padding:20px 24px 24px}
- 
-    /* ─── EMPTY STATE ─── */
-    .empty-state{
-      grid-column:1/-1;text-align:center;padding:60px 20px;
-      color:var(--gray-400);
-    }
-    .empty-state .empty-icon{font-size:40px;margin-bottom:12px}
-    .empty-state p{font-family:'Cormorant Garamond',serif;font-size:20px}
- 
-    /* ─── SECTION ─── */
-    .section{display:none}
-    .section.active{display:block}
- 
-    /* ─── RESPONSIVE ─── */
-    @media(max-width:900px){
-      .content-grid{grid-template-columns:1fr}
-      .map-panel{position:static;margin-top:0}
-      #map{height:260px}
-      header{padding:0 16px}
-      main{padding:20px 16px}
-      .hero{padding:40px 16px 32px}
-    }
- 
-    /* Leaflet popup override */
-    .leaflet-popup-content-wrapper{
-      border-radius:10px !important;padding:0 !important;overflow:hidden;
-    }
-    .leaflet-popup-content{margin:0 !important;width:auto !important}
-    .leaflet-popup-tip-container{display:none}
- 
-    /* Custom marker */
     .custom-marker{
       background:var(--black);color:var(--white);
       padding:4px 8px;border-radius:6px;
@@ -332,6 +255,186 @@
       content:'';display:block;width:6px;height:6px;
       background:var(--black);border-bottom:2px solid var(--white);border-right:2px solid var(--white);
       transform:rotate(45deg);margin:-3px auto 0;
+    }
+ 
+    .empty-state{
+      grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray-400);
+    }
+    .empty-state .empty-icon{font-size:40px;margin-bottom:12px}
+    .empty-state p{font-family:'Cormorant Garamond',serif;font-size:20px}
+ 
+    .section{display:none}
+    .section.active{display:block}
+ 
+    @media(max-width:900px){
+      .content-grid{grid-template-columns:1fr}
+      .map-panel{position:static;margin-top:0}
+      #map{height:260px}
+      header{padding:0 16px}
+      main{padding:20px 16px}
+      .hero{padding:40px 16px 32px}
+    }
+ 
+    /* ══════════════════════════════════════
+       PÁGINA DE DETALLE (estilo Oikos)
+    ══════════════════════════════════════ */
+    .detail-page{
+      font-family:'Outfit',sans-serif;
+      background:#f7f7f7;min-height:100vh;
+    }
+    .detail-topbar{
+      background:#fff;border-bottom:1px solid #e8e8e8;
+      padding:14px 24px;display:flex;align-items:center;gap:12px;
+      position:sticky;top:0;z-index:100;
+    }
+    .detail-back{
+      border:none;background:none;cursor:pointer;
+      font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;
+      color:#444;display:flex;align-items:center;gap:6px;
+      padding:6px 12px;border-radius:6px;transition:background .15s;
+    }
+    .detail-back:hover{background:#f0f0f0}
+    .detail-topbar-title{font-weight:600;font-size:15px;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ 
+    .detail-wrap{max-width:1200px;margin:0 auto;padding:28px 20px 80px}
+ 
+    /* Galería */
+    .gallery-grid{
+      display:grid;grid-template-columns:1fr 180px;gap:6px;
+      border-radius:14px;overflow:hidden;margin-bottom:24px;
+      background:#111;max-height:480px;
+    }
+    .gallery-main{position:relative;overflow:hidden}
+    .gallery-main img{
+      width:100%;height:100%;object-fit:cover;display:block;
+      transition:transform .4s;
+    }
+    .gallery-main:hover img{transform:scale(1.02)}
+    .gallery-badge{
+      position:absolute;top:14px;left:14px;
+      padding:5px 14px;border-radius:6px;
+      font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    }
+    .gb-venta{background:#0a0a0a;color:#fff}
+    .gb-arriendo{background:#c9a96e;color:#000}
+    .gallery-thumbs{
+      display:flex;flex-direction:column;gap:5px;
+      padding:5px 5px 5px 0;overflow-y:auto;
+    }
+    .gallery-thumb{
+      flex-shrink:0;height:80px;cursor:pointer;
+      border-radius:8px;overflow:hidden;
+      border:2px solid transparent;transition:border-color .15s,opacity .15s;
+    }
+    .gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .gallery-thumb.active{border-color:#c9a96e}
+    .gallery-thumb:hover:not(.active){opacity:.75}
+    .gallery-no-photo{
+      width:100%;height:320px;background:#e8e8e8;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:14px;color:#aaa;font-size:14px;margin-bottom:24px;
+    }
+ 
+    /* Detail body grid */
+    .detail-body{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+ 
+    /* Left col */
+    .detail-left .prop-tag2{
+      font-size:11px;letter-spacing:2px;text-transform:uppercase;
+      color:#888;margin-bottom:8px;font-weight:500;
+    }
+    .detail-left .prop-name2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(24px,3vw,36px);font-weight:700;
+      line-height:1.15;color:#111;margin-bottom:8px;
+    }
+    .detail-left .prop-addr2{
+      display:flex;align-items:center;gap:5px;
+      font-size:13px;color:#666;margin-bottom:20px;
+    }
+ 
+    .feat-row{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;
+    }
+    .feat-box{
+      background:#fff;border:1px solid #ececec;border-radius:10px;
+      padding:12px;text-align:center;
+    }
+    .feat-box .ficon{font-size:18px;margin-bottom:3px}
+    .feat-box .fval{font-size:14px;font-weight:600;color:#111}
+    .feat-box .flbl{font-size:10px;color:#999;text-transform:uppercase;letter-spacing:1px}
+ 
+    .sec-hdr{
+      font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;
+      color:#111;margin-bottom:10px;padding-bottom:8px;
+      border-bottom:1px solid #e8e8e8;
+    }
+    .desc-txt{font-size:14px;color:#555;line-height:1.7;margin-bottom:24px}
+ 
+    /* Mapa detalle */
+    .detail-map-wrap{margin-bottom:24px}
+    #detail-map{height:220px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e8}
+ 
+    /* Contact card */
+    .contact-card{
+      background:#fff;border:1px solid #e8e8e8;border-radius:14px;
+      padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.07);
+      position:sticky;top:80px;
+    }
+    .cc-price-lbl{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:4px}
+    .cc-price{
+      font-family:'Cormorant Garamond',serif;
+      font-size:30px;font-weight:700;color:#111;line-height:1;
+    }
+    .cc-price-sub{font-size:12px;color:#bbb;margin-top:2px;margin-bottom:18px}
+    .cc-divider{border:none;border-top:1px solid #ececec;margin:14px 0}
+    .cc-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}
+    .cc-row .lbl{color:#888}
+    .cc-row .val{font-weight:600;color:#111}
+    .cc-btn-wa{
+      width:100%;padding:14px;border-radius:10px;border:none;
+      background:#25D366;color:#fff;
+      font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      cursor:pointer;margin-top:18px;
+      transition:background .2s,transform .15s;
+      box-shadow:0 4px 14px rgba(37,211,102,0.3);
+    }
+    .cc-btn-wa:hover{background:#22c55e;transform:translateY(-1px)}
+    .cc-btn-wa img{width:20px}
+    .cc-agent{
+      display:flex;align-items:center;gap:10px;
+      margin-top:16px;padding-top:16px;border-top:1px solid #ececec;
+    }
+    .cc-avatar{
+      width:40px;height:40px;border-radius:50%;
+      background:#0a0a0a;display:flex;align-items:center;justify-content:center;
+      font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#c9a96e;
+      flex-shrink:0;
+    }
+    .cc-agent-name{font-size:13px;font-weight:600;color:#111}
+    .cc-agent-role{font-size:11px;color:#999}
+ 
+    /* Floating WA on detail page */
+    .wa-float-detail{
+      position:fixed;bottom:20px;right:20px;
+      width:56px;height:56px;border-radius:50%;
+      background:#25D366;border:none;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;z-index:9999;
+      box-shadow:0 6px 20px rgba(0,0,0,0.2);
+      transition:transform .2s;
+    }
+    .wa-float-detail:hover{transform:scale(1.08)}
+    .wa-float-detail img{width:26px}
+ 
+    @media(max-width:800px){
+      .gallery-grid{grid-template-columns:1fr;max-height:none}
+      .gallery-thumbs{flex-direction:row;padding:0 5px 5px;overflow-x:auto;overflow-y:hidden}
+      .gallery-thumb{width:70px;height:55px;flex-shrink:0}
+      .detail-body{grid-template-columns:1fr}
+      .contact-card{position:static}
+      .feat-row{grid-template-columns:repeat(3,1fr)}
     }
   </style>
 </head>
@@ -373,10 +476,7 @@
   </div>
  
   <main>
-    <!-- HOME SECTION -->
     <section id="home" class="section active">
- 
-      <!-- Filter bar -->
       <div class="filter-bar">
         <div class="results-label">
           Propiedades <span id="totalCountLabel"></span>
@@ -386,7 +486,6 @@
         </button>
       </div>
  
-      <!-- Filter panel (hidden by default) -->
       <div class="filter-panel" id="filterPanel">
         <div class="filter-grid">
           <div class="filter-field">
@@ -424,11 +523,8 @@
         <button class="filter-apply" id="apply">Aplicar filtros</button>
       </div>
  
-      <!-- Grid: listings + map -->
       <div class="content-grid">
-        <div class="listings" id="listings">
-          <!-- cards rendered by JS -->
-        </div>
+        <div class="listings" id="listings"></div>
         <div class="map-panel">
           <div class="map-header">
             <div class="map-header-title">Mapa de propiedades</div>
@@ -438,46 +534,21 @@
         </div>
       </div>
     </section>
+ 
+    <!-- DETALLE SECTION -->
+    <section id="detailSection" class="section"></section>
   </main>
  
-  <!-- PROPERTY MODAL -->
-  <div id="propModal" class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="propModalTitle">Propiedad</div>
-      <button class="modal-close" onclick="closePropModal()">✕</button>
-    </div>
-    <div class="modal-body" id="propModalBody"></div>
-  </div>
- 
-  <!-- CONTACT MODAL -->
-  <div id="contactModal" class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Contactar</div>
-      <button class="modal-close" onclick="hideModals()">✕</button>
-    </div>
-    <div class="modal-body">
-      <p style="color:var(--gray-500);margin-bottom:16px;font-size:14px">Nos pondremos en contacto contigo pronto para coordinar una visita.</p>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;gap:8px">
-          <input id="c_name" placeholder="Tu nombre" style="flex:1;padding:10px 12px;border:1px solid var(--gray-200);border-radius:8px;font-family:Outfit,sans-serif;font-size:13px;outline:none"/>
-          <input id="c_phone" placeholder="Teléfono" style="flex:1;padding:10px 12px;border:1px solid var(--gray-200);border-radius:8px;font-family:Outfit,sans-serif;font-size:13px;outline:none"/>
-        </div>
-        <button onclick="sendContact()" style="padding:12px;border-radius:8px;border:none;background:var(--black);color:var(--white);font-family:Outfit,sans-serif;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:1px">
-          ENVIAR SOLICITUD
-        </button>
-      </div>
-    </div>
-  </div>
+  <button class="whatsapp-float" id="globalWaBtn" onclick="contactWhatsApp()">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="28">
+  </button>
  
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // ── Logo as base64 from uploaded image ──
-    // We'll use an inline SVG representation of the AE logo
     const LOGO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text x="10" y="80" font-family="serif" font-size="90" font-weight="700" fill="white">Æ</text></svg>`;
     document.getElementById('logoImg').src = LOGO_SVG;
  
     const PROPS_KEY = 'inmobiliaria_props_v2';
- 
     function load(key){ try{ return JSON.parse(localStorage.getItem(key)||'[]') }catch(e){ return [] } }
     function save(key,val){ localStorage.setItem(key,JSON.stringify(val)) }
     function formatCOP(n){ if(!n) return '—'; return '$' + Number(n).toLocaleString('es-CO') + ' COP' }
@@ -486,13 +557,16 @@
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
     document.getElementById('openMenu').addEventListener('click',()=>{ drawer.classList.add('open'); overlay.classList.add('show'); });
-    overlay.addEventListener('click',()=>{ drawer.classList.remove('open'); overlay.classList.remove('show'); hideModals(); });
+    overlay.addEventListener('click',()=>{ drawer.classList.remove('open'); overlay.classList.remove('show'); });
  
     function showSection(id){
       document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
       const el = document.getElementById(id);
       if(el) el.classList.add('active');
       drawer.classList.remove('open'); overlay.classList.remove('show');
+      // show/hide hero and global WA btn
+      document.getElementById('heroSection').style.display = (id === 'home') ? '' : 'none';
+      document.getElementById('globalWaBtn').style.display = (id === 'home') ? 'flex' : 'none';
       setTimeout(()=>{ if(window.mapObj) mapObj.invalidateSize(); },200);
     }
  
@@ -513,7 +587,7 @@
     });
     document.getElementById('apply').addEventListener('click', applyFilters);
  
-    // ── Map ──
+    // ── Map (listado) ──
     const mapObj = L.map('map',{zoomControl:true}).setView([4.7110,-74.0721],6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mapObj);
     let markersGroup = L.layerGroup().addTo(mapObj);
@@ -528,31 +602,13 @@
           : p.price >= 1000000
             ? Math.round(p.price/1000000)+'M'
             : formatCOP(p.price);
- 
         const icon = L.divIcon({
           className:'',
           html:`<div class="custom-marker">${priceShort}</div>`,
           iconAnchor:[0,28],
         });
         const marker = L.marker([p.lat,p.lng],{icon}).addTo(markersGroup);
- 
-        // popup with photo card
-        const imgSrc = p.images && p.images[0] ? p.images[0] : '';
-        const imgHtml = imgSrc
-          ? `<img src="${imgSrc}" style="width:100%;height:100px;object-fit:cover"/>`
-          : `<div style="width:100%;height:60px;background:#f3f3f3;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px">Sin foto</div>`;
- 
-        marker.bindPopup(`
-          <div style="width:200px;font-family:Outfit,sans-serif;">
-            ${imgHtml}
-            <div style="padding:10px">
-              <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:#111;margin-bottom:2px">${p.title}</div>
-              <div style="font-size:12px;color:#888;margin-bottom:6px">📍 ${p.location}</div>
-              <div style="font-size:14px;font-weight:600;color:#111;margin-bottom:8px">${formatCOP(p.price)}</div>
-              <button onclick="openPropById('${p.id}')" style="width:100%;padding:7px;border-radius:6px;border:none;background:#0a0a0a;color:white;font-size:12px;font-weight:500;cursor:pointer;">Ver propiedad →</button>
-            </div>
-          </div>
-        `,{maxWidth:220,minWidth:200});
+        marker.on('click', () => { openPropById(p.id); });
       });
     }
  
@@ -561,23 +617,19 @@
       const container = document.getElementById('listings');
       container.innerHTML='';
       document.getElementById('totalCountLabel').textContent = '— ' + props.length + ' resultado' + (props.length!==1?'s':'');
- 
       if(!props.length){
         container.innerHTML=`<div class="empty-state"><div class="empty-icon">🏡</div><p>No hay propiedades disponibles</p></div>`;
         return;
       }
- 
       props.forEach(p=>{
         const div = document.createElement('div');
         div.className='prop-card';
         const imgsrc = p.images && p.images[0]
           ? p.images[0]
           : `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%25' height='100%25' fill='%23f3f3f3'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23aaa' font-size='14'>Sin foto</text></svg>`;
- 
         const modality = p.modality || 'venta';
         const badgeClass = p.sold ? 'badge-vendida' : (modality === 'arriendo' ? 'badge-arriendo' : 'badge-venta');
         const badgeText = p.sold ? 'Vendida' : (modality === 'arriendo' ? 'Arriendo' : 'Venta');
- 
         div.innerHTML=`
           <div class="prop-img-wrap">
             <img class="prop-img" src="${imgsrc}" alt="${p.title}" loading="lazy"/>
@@ -589,8 +641,7 @@
             <div class="prop-location">📍 ${p.location}</div>
             <div class="prop-price">${formatCOP(p.price)}</div>
             <div class="prop-actions">
-              <button class="btn-ver" onclick="openPropById('${p.id}')">Ver detalle</button>
-              <button class="btn-contact" onclick="openContact('${p.id}')">Contactar</button>
+              <button class="btn-ver" style="flex:1" onclick="openPropById('${p.id}')">Ver detalle</button>
             </div>
           </div>
         `;
@@ -601,95 +652,201 @@
     // ── Filters ──
     function applyFilters(){
       let all = load(PROPS_KEY);
- 
-      // tab filter
       if(currentTab === 'venta') all = all.filter(p=>!p.sold && (p.modality||'venta')==='venta');
       else if(currentTab === 'arriendo') all = all.filter(p=>!p.sold && p.modality==='arriendo');
- 
       const qLoc = (document.getElementById('qLocation')?.value||'').toLowerCase();
       const qType = document.getElementById('qType')?.value||'';
       const minP = Number(document.getElementById('minPrice')?.value||0);
       const maxP = Number(document.getElementById('maxPrice')?.value||Infinity);
- 
       if(qLoc) all = all.filter(p=>(p.location||'').toLowerCase().includes(qLoc)||(p.title||'').toLowerCase().includes(qLoc));
       if(qType) all = all.filter(p=>p.type===qType);
       all = all.filter(p=>Number(p.price||0)>=minP && Number(p.price||0)<=maxP);
- 
       const s = document.getElementById('sort')?.value;
       if(s==='priceAsc') all.sort((a,b)=>a.price-b.price);
       else if(s==='priceDesc') all.sort((a,b)=>b.price-a.price);
       else all.sort((a,b)=>b.createdAt-a.createdAt);
- 
       renderListings(all);
       renderMarkers(all);
     }
  
-    // ── Prop modal ──
+    // ── WhatsApp ──
+    let contactPropId = null;
+ 
+    function contactWhatsApp(){
+      const props = load(PROPS_KEY);
+      const prop = props.find(p => p.id === contactPropId);
+      const mensaje = `Hola, estoy interesado en esta propiedad:\n\n🏡 ${prop?.title || ''}\n📍 ${prop?.location || ''}\n💰 ${formatCOP(prop?.price || 0)}\n\nQuiero más información.`;
+      const url = `https://wa.me/573166900449?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    }
+ 
+    // ── DETALLE DE PROPIEDAD (estilo Oikos) ──
     function openPropById(id){
       const props = load(PROPS_KEY);
-      const p = props.find(x=>x.id===id);
+      const p = props.find(x => x.id === id);
       if(!p) return;
  
-      document.getElementById('propModalTitle').textContent = p.title;
- 
-      const imgs = p.images && p.images.length
-        ? p.images.map(src=>`<img src="${src}" style="width:100%;max-height:300px;object-fit:cover;border-radius:10px;margin-bottom:12px"/>`).join('')
-        : '';
+      contactPropId = p.id;
  
       const modality = p.modality || 'venta';
-      const badgeText = p.sold ? 'Vendida' : (modality==='arriendo' ? 'En Arriendo' : 'En Venta');
-      const badgeColor = p.sold ? '#888' : (modality==='arriendo' ? '#c9a96e' : '#0a0a0a');
+      const badgeClass = p.sold ? '' : (modality === 'arriendo' ? 'gb-arriendo' : 'gb-venta');
+      const badgeText = p.sold ? 'Vendida' : (modality === 'arriendo' ? 'Arriendo' : 'Venta');
+      const images = (p.images && p.images.length) ? p.images : [];
  
-      document.getElementById('propModalBody').innerHTML = `
-        ${imgs}
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
-          <span style="padding:5px 14px;border-radius:20px;background:${badgeColor};color:white;font-size:12px;font-weight:600">${badgeText}</span>
-          <span style="font-size:13px;color:var(--gray-400)">${p.type||''}</span>
+      // Build gallery HTML
+      let galleryHTML = '';
+      if(images.length > 0){
+        const thumbsHTML = images.map((img, i) => `
+          <div class="gallery-thumb ${i===0?'active':''}" onclick="detailChangePhoto(${i}, this, ${JSON.stringify(images).replace(/"/g,'&quot;')})">
+            <img src="${img}" loading="lazy"/>
+          </div>
+        `).join('');
+ 
+        galleryHTML = `
+          <div class="gallery-grid">
+            <div class="gallery-main">
+              <img id="detailMainPhoto" src="${images[0]}" alt="${p.title}"/>
+              <div class="gallery-badge ${badgeClass}">${badgeText}</div>
+            </div>
+            ${images.length > 1 ? `<div class="gallery-thumbs">${thumbsHTML}</div>` : ''}
+          </div>
+        `;
+      } else {
+        galleryHTML = `<div class="gallery-no-photo">📷 Sin fotos disponibles</div>`;
+      }
+ 
+      // Map HTML
+      const mapHTML = (p.lat && p.lng) ? `
+        <div class="detail-map-wrap">
+          <div class="sec-hdr">Ubicación y lugares de interés</div>
+          <div id="detail-map"></div>
         </div>
-        <div style="font-size:24px;font-weight:600;color:var(--gray-900);margin-bottom:6px">${formatCOP(p.price)}</div>
-        <div style="font-size:14px;color:var(--gray-500);margin-bottom:16px">📍 ${p.location||''}</div>
-        ${p.desc ? `<p style="font-size:14px;color:var(--gray-600);line-height:1.7;margin-bottom:20px">${p.desc}</p>` : ''}
-        ${p.lat && p.lng ? `<div style="font-size:12px;color:var(--gray-400);padding:8px 12px;background:var(--gray-50);border-radius:6px;margin-bottom:16px">🗺 Coordenadas: ${p.lat}, ${p.lng}</div>` : ''}
-        <button onclick="openContact('${p.id}')" style="width:100%;padding:13px;border-radius:8px;border:none;background:var(--black);color:white;font-family:Outfit,sans-serif;font-size:14px;font-weight:500;cursor:pointer;letter-spacing:1px">
-          SOLICITAR INFORMACIÓN
-        </button>
+      ` : '';
+ 
+      const detailSection = document.getElementById('detailSection');
+      detailSection.innerHTML = `
+        <div class="detail-page">
+ 
+          <!-- Topbar -->
+          <div class="detail-topbar">
+            <button class="detail-back" onclick="goBackToList()">← Volver</button>
+            <div class="detail-topbar-title">${p.title}</div>
+          </div>
+ 
+          <div class="detail-wrap">
+ 
+            <!-- Galería -->
+            ${galleryHTML}
+ 
+            <!-- Cuerpo -->
+            <div class="detail-body">
+ 
+              <!-- Columna izquierda -->
+              <div class="detail-left">
+                <div class="prop-tag2">${p.type||'Propiedad'} · ${p.location}</div>
+                <h1 class="prop-name2">${p.title}</h1>
+                <div class="prop-addr2">
+                  📍 ${p.location}
+                </div>
+ 
+                <!-- Features rápidos -->
+                <div class="feat-row">
+                  <div class="feat-box">
+                    <div class="ficon">💰</div>
+                    <div class="fval">${modality === 'arriendo' ? 'Arriendo' : 'Venta'}</div>
+                    <div class="flbl">Modalidad</div>
+                  </div>
+                  <div class="feat-box">
+                    <div class="ficon">🏠</div>
+                    <div class="fval">${p.type||'—'}</div>
+                    <div class="flbl">Tipo</div>
+                  </div>
+                  <div class="feat-box">
+                    <div class="ficon">📍</div>
+                    <div class="fval">${p.location ? p.location.split(',')[0] : '—'}</div>
+                    <div class="flbl">Ciudad</div>
+                  </div>
+                </div>
+ 
+                <!-- Descripción -->
+                ${p.desc ? `
+                <div class="sec-hdr">Descripción</div>
+                <p class="desc-txt">${p.desc}</p>
+                ` : ''}
+ 
+                <!-- Mapa -->
+                ${mapHTML}
+              </div>
+ 
+              <!-- Columna derecha: tarjeta contacto -->
+              <div class="contact-card">
+                <div class="cc-price-lbl">Valor ${modality === 'arriendo' ? 'arriendo' : 'venta'}</div>
+                <div class="cc-price">${formatCOP(p.price)}</div>
+                <div class="cc-price-sub">${modality === 'arriendo' ? 'Mensual' : 'Precio total negociable'}</div>
+ 
+                <hr class="cc-divider"/>
+ 
+                <div class="cc-row"><span class="lbl">Tipo</span><span class="val">${p.type||'—'}</span></div>
+                <div class="cc-row"><span class="lbl">Modalidad</span><span class="val">${badgeText}</span></div>
+                <div class="cc-row"><span class="lbl">Ubicación</span><span class="val">${p.location ? p.location.split(',')[0] : '—'}</span></div>
+                ${p.location && p.location.includes(',') ? `<div class="cc-row"><span class="lbl">Departamento</span><span class="val">${p.location.split(',')[1]?.trim()||'—'}</span></div>` : ''}
+ 
+                <button class="cc-btn-wa" onclick="contactWhatsApp()">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>
+                  Solicitar información
+                </button>
+ 
+                <div class="cc-agent">
+                  <div class="cc-avatar">AE</div>
+                  <div>
+                    <div class="cc-agent-name">AE Soluciones Inmobiliarias</div>
+                    <div class="cc-agent-role">Asesor comercial</div>
+                  </div>
+                </div>
+              </div>
+ 
+            </div>
+          </div>
+ 
+          <!-- Botón flotante WhatsApp -->
+          <button class="wa-float-detail" onclick="contactWhatsApp()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>
+          </button>
+ 
+        </div>
       `;
  
-      showModal(document.getElementById('propModal'));
-      if(p.lat && p.lng) mapObj.setView([p.lat,p.lng],14);
+      showSection('detailSection');
+ 
+      // Inicializar mapa detalle
+      if(p.lat && p.lng){
+        setTimeout(()=>{
+          const dmap = L.map('detail-map').setView([p.lat, p.lng], 15);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(dmap);
+          L.marker([p.lat, p.lng]).addTo(dmap)
+            .bindPopup(`<b>${p.title}</b><br>${p.location}`)
+            .openPopup();
+        }, 150);
+      }
     }
  
-    function closePropModal(){ hideModals() }
+    // Cambiar foto en galería del detalle
+    window.detailChangePhoto = function(idx, el, images){
+      document.getElementById('detailMainPhoto').src = images[idx];
+      document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active'));
+      el.classList.add('active');
+    };
  
-    // ── Contact ──
-    let contactPropId = null;
-    function openContact(id){
-      contactPropId = id;
-      hideModals();
-      showModal(document.getElementById('contactModal'));
+    function goBackToList(){
+      showSection('home');
+      document.getElementById('heroSection').style.display = '';
+      document.getElementById('globalWaBtn').style.display = 'flex';
+      setTimeout(()=>{ if(window.mapObj) mapObj.invalidateSize(); },200);
     }
-    function sendContact(){
-      const name = document.getElementById('c_name').value;
-      const phone = document.getElementById('c_phone').value;
-      if(!name||!phone){ alert('Por favor ingresa nombre y teléfono'); return; }
-      hideModals();
-      // In production: send to backend
-      alert('¡Solicitud enviada! Nos contactaremos con ' + name + ' al ' + phone + ' pronto.');
-      document.getElementById('c_name').value='';
-      document.getElementById('c_phone').value='';
-    }
-    window.sendContact = sendContact;
- 
-    // ── Modals ──
-    function showModal(el){ el.classList.add('show'); overlay.classList.add('show'); }
-    function hideModals(){ document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show')); overlay.classList.remove('show'); }
  
     window.openPropById = openPropById;
-    window.openContact = openContact;
  
     // ── DEMO DATA ──
-    // Para agregar propiedades edita este array y recarga la página:
-    // modality: 'venta' | 'arriendo'
     (function initData(){
       if(load(PROPS_KEY).length === 0){
         const demo = [
@@ -697,7 +854,12 @@
             id:'p1', title:'Casa campestre con vista al río',
             type:'Casa', modality:'venta', price:350000000,
             location:'Tabio, Cundinamarca', lat:4.9225, lng:-74.1900,
-            images:[], desc:'Hermosa casa con zona BBQ, piscina y amplio jardín. 4 habitaciones, 3 baños. Escritura lista.',
+            images:[
+              "https://www.rubi.com/es/blog/wp-content/uploads/2024/10/shutterstock_2478836439_11zon.jpg",
+              "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+              "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9"
+            ],
+            desc:'Hermosa casa con zona BBQ, piscina y amplio jardín. 4 habitaciones, 3 baños. Escritura lista.',
             createdAt: Date.now()-1000000, sold:false
           },
           {
@@ -743,31 +905,7 @@
  
     window.addEventListener('load', ()=>{ applyFilters(); });
  
-    /*
-    ════════════════════════════════════════════════════════
-    CÓMO AGREGAR PROPIEDADES (solo tú, desde el código)
-    ════════════════════════════════════════════════════════
- 
-    1. Abre las DevTools del navegador (F12) y ve a la Consola.
-    2. Ejecuta esta función con los datos de la propiedad:
- 
-    addProperty({
-      title: 'Nombre de la propiedad',
-      type: 'Casa',              // Casa | Apartamento | Lote | Finca | Otro
-      modality: 'venta',         // venta | arriendo
-      price: 300000000,          // precio en COP
-      location: 'Ciudad, Depto',
-      lat: 4.7110,               // latitud (para aparecer en mapa)
-      lng: -74.0721,             // longitud
-      desc: 'Descripción...',
-      images: []                 // array de base64 o URLs de imágenes
-    });
- 
-    3. La propiedad aparece al instante en la página.
- 
-    Para usar imágenes, puedes convertirlas a base64 o apuntar a una URL pública.
-    ════════════════════════════════════════════════════════
-    */
+    // ── Admin utils ──
     window.addProperty = function(data){
       const props = load(PROPS_KEY);
       const prop = {
@@ -790,7 +928,6 @@
       console.log('✅ Propiedad agregada:', prop.title);
     };
  
-    // Also expose deleteProperty and markSold for admin use
     window.deleteProperty = function(id){
       const props = load(PROPS_KEY).filter(p=>p.id!==id);
       save(PROPS_KEY,props);
@@ -811,7 +948,34 @@
       const props = load(PROPS_KEY);
       console.table(props.map(p=>({id:p.id,title:p.title,type:p.type,modality:p.modality,price:p.price,location:p.location})));
     };
- 
+    addProperty({
+  title: "Casa moderna Ibague",
+  type: "Casa",
+  modality: "venta",
+  price: 450000000,
+  location: "Ibague, Tolima",
+  lat: 4.418780,
+  lng: -75.170053,
+  images: [
+    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9",
+    "Imagenes/Imagen2.jpg"
+  ],
+  desc: "Casa de 3 habitaciones, sala amplia, jardín y parqueadero privado."
+});
+ addProperty({
+  title: "Apartamento en arriendo calle 72",
+  type: "Apartamento",
+  modality: "Renta",
+  price: 310000000,
+  location: "Bogota DC",
+  lat: 4.662734,
+  lng: -74.067447,
+  images: [
+    "Imagenes/apto72.1.jpg",
+    "Imagenes/apto72.2.jpeg"
+  ],
+  desc: "Apartamento bien ubicado en la 72 que cuenta con dos habitaciones, sala de ropas y cocina amplia que conecta con la sala."
+});
   </script>
 </body>
 </html>
