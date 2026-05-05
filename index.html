@@ -1,6 +1,3 @@
-Ae soluciones · HTML
-Copy
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -11,194 +8,71 @@ Copy
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --black: #0a0a0a;
-      --gray-900: #111111;
-      --gray-800: #1a1a1a;
-      --gray-700: #2a2a2a;
-      --gray-600: #3a3a3a;
-      --gray-500: #555555;
-      --gray-400: #888888;
-      --gray-300: #aaaaaa;
-      --gray-200: #cccccc;
-      --gray-100: #e8e8e8;
-      --gray-50: #f4f4f4;
-      --white: #ffffff;
-      --accent: #c9a96e;
-      --accent-light: #e8d5b0;
+      --black:#0a0a0a;--gray-900:#111;--gray-800:#1a1a1a;--gray-700:#2a2a2a;
+      --gray-600:#3a3a3a;--gray-500:#555;--gray-400:#888;--gray-300:#aaa;
+      --gray-200:#ccc;--gray-100:#e8e8e8;--gray-50:#f4f4f4;--white:#fff;
+      --accent:#c9a96e;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{
-      font-family:'Outfit',sans-serif;
-      background:var(--gray-50);
-      color:var(--gray-800);
-      min-height:100vh;
-    }
+    body{font-family:'Outfit',sans-serif;background:var(--gray-50);color:var(--gray-800);min-height:100vh}
  
-    /* ─── HEADER ─── */
-    header{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0 32px;height:70px;
-      background:var(--black);
-      position:sticky;top:0;z-index:1200;
-      border-bottom:1px solid var(--gray-700);
-    }
+    /* HEADER */
+    header{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:70px;background:var(--black);position:sticky;top:0;z-index:1200;border-bottom:1px solid var(--gray-700)}
     .logo-area{display:flex;align-items:center;gap:14px}
-    .logo-img{
-      height:44px;width:44px;object-fit:contain;
-      filter:brightness(0) invert(1);
-    }
-    .logo-text{
-      font-family:'Cormorant Garamond',serif;
-      font-size:17px;font-weight:500;letter-spacing:2px;
-      color:var(--white);text-transform:uppercase;line-height:1.2;
-    }
+    .logo-img{height:44px;width:44px;object-fit:contain;filter:brightness(0) invert(1)}
+    .logo-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;letter-spacing:2px;color:var(--white);text-transform:uppercase;line-height:1.2}
     .logo-text span{display:block;font-size:10px;letter-spacing:4px;color:var(--gray-300);font-weight:300}
-    .hamburger{
-      background:transparent;border:1px solid var(--gray-600);
-      color:var(--white);padding:8px 12px;border-radius:6px;cursor:pointer;
-      font-size:16px;transition:all .2s;
-    }
+    .hamburger{background:transparent;border:1px solid var(--gray-600);color:var(--white);padding:8px 12px;border-radius:6px;cursor:pointer;font-size:16px;transition:all .2s}
     .hamburger:hover{border-color:var(--accent);color:var(--accent)}
  
-    /* ─── DRAWER ─── */
-    .drawer{
-      position:fixed;left:0;top:0;bottom:0;width:280px;
-      background:var(--gray-900);
-      box-shadow:4px 0 30px rgba(0,0,0,0.5);
-      transform:translateX(-110%);transition:transform .28s ease;
-      padding:24px 20px;z-index:1300;
-      border-right:1px solid var(--gray-700);
-    }
+    /* DRAWER */
+    .drawer{position:fixed;left:0;top:0;bottom:0;width:280px;background:var(--gray-900);box-shadow:4px 0 30px rgba(0,0,0,0.5);transform:translateX(-110%);transition:transform .28s ease;padding:24px 20px;z-index:1300;border-right:1px solid var(--gray-700)}
     .drawer.open{transform:translateX(0)}
-    .drawer-logo{
-      font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;
-      color:var(--white);margin-bottom:24px;letter-spacing:1px;
-    }
+    .drawer-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:24px;letter-spacing:1px}
     .drawer hr{border:none;border-top:1px solid var(--gray-700);margin:16px 0}
-    .drawer button{
-      width:100%;padding:10px 14px;border-radius:6px;border:none;
-      background:transparent;color:var(--gray-200);
-      text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;
-      font-size:14px;font-weight:400;transition:all .15s;
-      margin-bottom:4px;
-    }
+    .drawer button{width:100%;padding:10px 14px;border-radius:6px;border:none;background:transparent;color:var(--gray-200);text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;font-weight:400;transition:all .15s;margin-bottom:4px}
     .drawer button:hover{background:var(--gray-700);color:var(--white)}
     .drawer .small{font-size:11px;color:var(--gray-500);margin-top:8px}
- 
-    /* overlay */
-    .overlay{
-      position:fixed;inset:0;background:rgba(0,0,0,0.6);
-      opacity:0;pointer-events:none;transition:opacity .2s;z-index:1100;
-    }
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity .2s;z-index:1100}
     .overlay.show{opacity:1;pointer-events:auto}
  
-    /* ─── HERO / TABS SECTION ─── */
-    .hero{
-      background:var(--black);
-      padding:60px 32px 48px;
-      text-align:center;
-      position:relative;
-      overflow:hidden;
-    }
-    .hero::before{
-      content:'';position:absolute;inset:0;
-      background:radial-gradient(ellipse 80% 60% at 50% 120%, rgba(201,169,110,0.08) 0%, transparent 70%);
-      pointer-events:none;
-    }
-    .hero-title{
-      font-family:'Cormorant Garamond',serif;
-      font-size:clamp(36px,5vw,64px);font-weight:300;
-      color:var(--white);letter-spacing:3px;
-      line-height:1.1;margin-bottom:12px;
-    }
-    .hero-sub{
-      font-size:13px;letter-spacing:4px;text-transform:uppercase;
-      color:var(--gray-400);margin-bottom:36px;font-weight:300;
-    }
-    .tab-row{
-      display:inline-flex;gap:0;border:1px solid var(--gray-600);border-radius:8px;overflow:hidden;
-    }
-    .tab-btn{
-      padding:12px 36px;border:none;cursor:pointer;font-family:'Outfit',sans-serif;
-      font-size:14px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
-      transition:all .2s;background:transparent;color:var(--gray-300);
-    }
+    /* HERO */
+    .hero{background:var(--black);padding:60px 32px 48px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(201,169,110,0.08) 0%,transparent 70%);pointer-events:none}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,64px);font-weight:300;color:var(--white);letter-spacing:3px;line-height:1.1;margin-bottom:12px}
+    .hero-sub{font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--gray-400);margin-bottom:36px;font-weight:300}
+    .tab-row{display:inline-flex;gap:0;border:1px solid var(--gray-600);border-radius:8px;overflow:hidden}
+    .tab-btn{padding:12px 28px;border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;transition:all .2s;background:transparent;color:var(--gray-300)}
     .tab-btn.active{background:var(--accent);color:var(--black)}
     .tab-btn:not(.active):hover{background:var(--gray-700);color:var(--white)}
     .tab-divider{width:1px;background:var(--gray-600)}
  
-    /* ─── MAIN CONTENT ─── */
+    /* MAIN */
     main{max-width:1280px;margin:0 auto;padding:32px 24px}
- 
-    /* ─── FILTER BAR ─── */
-    .filter-bar{
-      display:flex;align-items:center;justify-content:space-between;
-      margin-bottom:24px;gap:12px;flex-wrap:wrap;
-    }
-    .results-label{
-      font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;
-      color:var(--gray-800);
-    }
+    .filter-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap}
+    .results-label{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--gray-800)}
     .results-label span{color:var(--gray-400);font-size:16px}
-    .filter-toggle-btn{
-      display:flex;align-items:center;gap:8px;
-      padding:10px 20px;border-radius:8px;border:1px solid var(--gray-200);
-      background:var(--white);color:var(--gray-700);cursor:pointer;
-      font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;
-      transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.06);
-    }
+    .filter-toggle-btn{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-700);cursor:pointer;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
     .filter-toggle-btn:hover{border-color:var(--gray-500);background:var(--gray-50)}
-    .filter-icon{font-size:16px}
- 
-    .filter-panel{
-      background:var(--white);border:1px solid var(--gray-100);border-radius:12px;
-      padding:24px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06);
-      display:none;
-    }
+    .filter-panel{background:var(--white);border:1px solid var(--gray-100);border-radius:12px;padding:24px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06);display:none}
     .filter-panel.open{display:block}
-    .filter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
-    .filter-field label{
-      display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;
-      text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;
-    }
-    .filter-field input,.filter-field select{
-      width:100%;padding:9px 12px;border-radius:7px;
-      border:1px solid var(--gray-200);font-family:'Outfit',sans-serif;
-      font-size:13px;color:var(--gray-800);background:var(--gray-50);
-      outline:none;transition:border .15s;
-    }
+    .filter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+    .filter-field label{display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px}
+    .filter-field input,.filter-field select{width:100%;padding:9px 12px;border-radius:7px;border:1px solid var(--gray-200);font-family:'Outfit',sans-serif;font-size:13px;color:var(--gray-800);background:var(--gray-50);outline:none;transition:border .15s}
     .filter-field input:focus,.filter-field select:focus{border-color:var(--gray-500);background:var(--white)}
-    .filter-apply{
-      margin-top:16px;padding:10px 28px;border-radius:7px;border:none;
-      background:var(--black);color:var(--white);cursor:pointer;
-      font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;
-      letter-spacing:1px;text-transform:uppercase;transition:background .2s;
-    }
+    .filter-apply{margin-top:16px;padding:10px 28px;border-radius:7px;border:none;background:var(--black);color:var(--white);cursor:pointer;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;transition:background .2s}
     .filter-apply:hover{background:var(--gray-700)}
  
-    /* ─── LAYOUT: listings + map ─── */
-    .content-grid{
-      display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:start;
-    }
- 
-    /* ─── PROPERTY CARDS ─── */
-    .listings{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-    .prop-card{
-      background:var(--white);border-radius:12px;overflow:hidden;
-      border:1px solid var(--gray-100);
-      box-shadow:0 2px 12px rgba(0,0,0,0.05);
-      transition:transform .2s,box-shadow .2s;cursor:pointer;
-    }
+    /* GRID + CARDS */
+    .content-grid{display:grid;grid-template-columns:1fr 400px;gap:24px;align-items:start}
+    .listings{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+    .prop-card{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid var(--gray-100);box-shadow:0 2px 12px rgba(0,0,0,0.05);transition:transform .2s,box-shadow .2s;cursor:pointer}
     .prop-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.1)}
     .prop-img-wrap{position:relative;height:180px;overflow:hidden;background:var(--gray-100)}
     .prop-img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
     .prop-card:hover .prop-img{transform:scale(1.04)}
-    .prop-badge{
-      position:absolute;top:10px;left:10px;
-      padding:4px 10px;border-radius:5px;font-size:11px;font-weight:600;
-      letter-spacing:1px;text-transform:uppercase;
-    }
+    .prop-badge{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
     .badge-venta{background:var(--black);color:var(--white)}
     .badge-arriendo{background:var(--accent);color:var(--black)}
     .badge-vendida{background:var(--gray-400);color:var(--white)}
@@ -207,62 +81,23 @@ Copy
     .prop-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--gray-900);margin-bottom:4px;line-height:1.3}
     .prop-location{font-size:12px;color:var(--gray-400);display:flex;align-items:center;gap:4px;margin-bottom:10px}
     .prop-price{font-size:17px;font-weight:600;color:var(--gray-900);margin-bottom:12px}
-    .prop-actions{display:flex;gap:8px}
-    .btn-ver{
-      flex:1;padding:8px;border-radius:7px;border:1px solid var(--gray-200);
-      background:transparent;color:var(--gray-700);cursor:pointer;
-      font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;
-      transition:all .15s;
-    }
+    .btn-ver{width:100%;padding:9px;border-radius:7px;border:1px solid var(--gray-200);background:transparent;color:var(--gray-700);cursor:pointer;font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;transition:all .15s}
     .btn-ver:hover{background:var(--black);color:var(--white);border-color:var(--black)}
  
- 
-    /* ─── MAP PANEL ─── */
-    .map-panel{
-      background:var(--white);border-radius:12px;overflow:hidden;
-      border:1px solid var(--gray-100);
-      box-shadow:0 2px 12px rgba(0,0,0,0.05);
-      position:sticky;top:90px;
-    }
-    .map-header{
-      padding:14px 16px;border-bottom:1px solid var(--gray-100);
-      display:flex;align-items:center;justify-content:space-between;
-    }
-    .map-header-title{
-      font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gray-900);
-    }
+    /* MAP */
+    .map-panel{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid var(--gray-100);box-shadow:0 2px 12px rgba(0,0,0,0.05);position:sticky;top:90px}
+    .map-header{padding:14px 16px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between}
+    .map-header-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gray-900)}
     #map{width:100%;height:45vh;z-index:1}
     @media(min-width:900px){#map{height:300px}}
- 
-    .whatsapp-float{
-      position:fixed;bottom:20px;right:20px;
-      width:60px;height:60px;border-radius:50%;
-      background:#25D366;border:none;z-index:9999;
-      box-shadow:0 10px 25px rgba(0,0,0,0.2);
-      display:flex;align-items:center;justify-content:center;cursor:pointer;
-    }
- 
     .leaflet-pane,.leaflet-top,.leaflet-bottom{z-index:1 !important}
+    .custom-marker{background:var(--black);color:var(--white);padding:4px 8px;border-radius:6px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;white-space:nowrap;border:2px solid var(--white);box-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer}
+    .custom-marker::after{content:'';display:block;width:6px;height:6px;background:var(--black);border-bottom:2px solid var(--white);border-right:2px solid var(--white);transform:rotate(45deg);margin:-3px auto 0}
  
-    .custom-marker{
-      background:var(--black);color:var(--white);
-      padding:4px 8px;border-radius:6px;
-      font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;
-      white-space:nowrap;border:2px solid var(--white);
-      box-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer;
-    }
-    .custom-marker::after{
-      content:'';display:block;width:6px;height:6px;
-      background:var(--black);border-bottom:2px solid var(--white);border-right:2px solid var(--white);
-      transform:rotate(45deg);margin:-3px auto 0;
-    }
- 
-    .empty-state{
-      grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray-400);
-    }
+    .whatsapp-float{position:fixed;bottom:20px;right:20px;width:60px;height:60px;border-radius:50%;background:#25D366;border:none;z-index:9999;box-shadow:0 10px 25px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray-400)}
     .empty-state .empty-icon{font-size:40px;margin-bottom:12px}
     .empty-state p{font-family:'Cormorant Garamond',serif;font-size:20px}
- 
     .section{display:none}
     .section.active{display:block}
  
@@ -271,711 +106,740 @@ Copy
       .map-panel{position:static;margin-top:0}
       #map{height:260px}
       header{padding:0 16px}
-      main{padding:20px 16px}
-      .hero{padding:40px 16px 32px}
+      main{padding:16px}
+      .hero{padding:36px 16px 32px}
+      .tab-btn{padding:10px 18px;font-size:12px}
     }
  
-    /* ══════════════════════════════════════
-       PÁGINA DE DETALLE (estilo Oikos)
-    ══════════════════════════════════════ */
-    .detail-page{
-      font-family:'Outfit',sans-serif;
-      background:#f7f7f7;min-height:100vh;
-    }
-    .detail-topbar{
-      background:#fff;border-bottom:1px solid #e8e8e8;
-      padding:14px 24px;display:flex;align-items:center;gap:12px;
-      position:sticky;top:0;z-index:100;
-    }
-    .detail-back{
-      border:none;background:none;cursor:pointer;
-      font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;
-      color:#444;display:flex;align-items:center;gap:6px;
-      padding:6px 12px;border-radius:6px;transition:background .15s;
-    }
+    /* ══════════════════════════════════
+       DETALLE DE PROPIEDAD
+    ══════════════════════════════════ */
+    .detail-page{background:#f7f7f7;min-height:100vh}
+    .detail-topbar{background:#fff;border-bottom:1px solid #e8e8e8;padding:14px 20px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:200}
+    .detail-back{border:none;background:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:#444;display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;transition:background .15s;white-space:nowrap}
     .detail-back:hover{background:#f0f0f0}
-    .detail-topbar-title{font-weight:600;font-size:15px;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .detail-topbar-title{font-weight:600;font-size:14px;color:#111;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .detail-wrap{max-width:1200px;margin:0 auto;padding:20px 16px 80px}
  
-    .detail-wrap{max-width:1200px;margin:0 auto;padding:28px 20px 80px}
+    /* ── GALERÍA NUEVA ── */
+    .gallery-container{
+      position:relative;
+      border-radius:14px;
+      overflow:hidden;
+      background:#111;
+      margin-bottom:20px;
+      /* Sin altura fija — se adapta al contenido */
+    }
  
-    /* Galería */
-    .gallery-grid{
-      display:grid;grid-template-columns:1fr 180px;gap:6px;
-      border-radius:14px;overflow:hidden;margin-bottom:24px;
-      background:#111;max-height:480px;
+    /* Foto principal: se adapta a la orientación */
+    .gallery-main-img{
+      display:block;
+      width:100%;
+      /* object-fit:contain para NO recortar nada */
+      object-fit:contain;
+      background:#111;
+      max-height:80vh;      /* máximo en desktop */
+      min-height:220px;
+      transition:opacity .25s;
     }
-    .gallery-main{position:relative;overflow:hidden}
-    .gallery-main img{
-      width:100%;height:100%;object-fit:cover;display:block;
-      transition:transform .4s;
-    }
-    .gallery-main:hover img{transform:scale(1.02)}
+ 
+    /* Badge encima de la foto */
     .gallery-badge{
       position:absolute;top:14px;left:14px;
       padding:5px 14px;border-radius:6px;
       font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+      z-index:10;pointer-events:none;
     }
     .gb-venta{background:#0a0a0a;color:#fff}
     .gb-arriendo{background:#c9a96e;color:#000}
-    .gallery-thumbs{
-      display:flex;flex-direction:column;gap:5px;
-      padding:5px 5px 5px 0;overflow-y:auto;
-    }
-    .gallery-thumb{
-      flex-shrink:0;height:80px;cursor:pointer;
-      border-radius:8px;overflow:hidden;
-      border:2px solid transparent;transition:border-color .15s,opacity .15s;
-    }
-    .gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .gallery-thumb.active{border-color:#c9a96e}
-    .gallery-thumb:hover:not(.active){opacity:.75}
-    .gallery-no-photo{
-      width:100%;height:320px;background:#e8e8e8;
+ 
+    /* Flechas de navegación */
+    .gallery-arrow{
+      position:absolute;top:50%;transform:translateY(-50%);
+      width:44px;height:44px;border-radius:50%;
+      background:rgba(255,255,255,0.92);border:none;
       display:flex;align-items:center;justify-content:center;
-      border-radius:14px;color:#aaa;font-size:14px;margin-bottom:24px;
+      cursor:pointer;font-size:20px;color:#111;
+      box-shadow:0 2px 12px rgba(0,0,0,0.25);
+      transition:background .15s,transform .15s;
+      z-index:20;
+    }
+    .gallery-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.08)}
+    .gallery-arrow.prev{left:12px}
+    .gallery-arrow.next{right:12px}
+    .gallery-arrow:disabled{opacity:.3;cursor:default}
+ 
+    /* Contador */
+    .gallery-counter{
+      position:absolute;bottom:12px;right:14px;
+      background:rgba(0,0,0,0.55);color:#fff;
+      padding:3px 10px;border-radius:20px;
+      font-size:12px;font-weight:500;z-index:10;
+      pointer-events:none;
     }
  
-    /* Detail body grid */
-    .detail-body{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+    /* Tiras de miniaturas */
+    .gallery-thumbs-row{
+      display:flex;gap:6px;padding:8px;
+      overflow-x:auto;background:#111;
+      border-top:1px solid rgba(255,255,255,0.08);
+      scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.2) transparent;
+    }
+    .gallery-thumbs-row::-webkit-scrollbar{height:4px}
+    .gallery-thumbs-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:4px}
+    .gthumb{
+      flex-shrink:0;width:70px;height:52px;
+      border-radius:6px;overflow:hidden;cursor:pointer;
+      border:2px solid transparent;transition:border-color .15s,opacity .15s;
+      background:#222;
+    }
+    .gthumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .gthumb.active{border-color:var(--accent)}
+    .gthumb:hover:not(.active){opacity:.75}
  
-    /* Left col */
-    .detail-left .prop-tag2{
-      font-size:11px;letter-spacing:2px;text-transform:uppercase;
-      color:#888;margin-bottom:8px;font-weight:500;
-    }
-    .detail-left .prop-name2{
-      font-family:'Cormorant Garamond',serif;
-      font-size:clamp(24px,3vw,36px);font-weight:700;
-      line-height:1.15;color:#111;margin-bottom:8px;
-    }
-    .detail-left .prop-addr2{
-      display:flex;align-items:center;gap:5px;
-      font-size:13px;color:#666;margin-bottom:20px;
-    }
+    .gallery-no-photo{width:100%;height:240px;background:#e8e8e8;display:flex;align-items:center;justify-content:center;border-radius:14px;color:#aaa;font-size:14px;margin-bottom:20px}
  
-    .feat-row{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;
-    }
-    .feat-box{
-      background:#fff;border:1px solid #ececec;border-radius:10px;
-      padding:12px;text-align:center;
-    }
+    /* CUERPO DETALLE */
+    .detail-body{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+    .detail-left .prop-tag2{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:6px;font-weight:500}
+    .detail-left .prop-name2{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,34px);font-weight:700;line-height:1.15;color:#111;margin-bottom:8px}
+    .detail-left .prop-addr2{display:flex;align-items:center;gap:5px;font-size:13px;color:#666;margin-bottom:18px}
+    .feat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+    .feat-box{background:#fff;border:1px solid #ececec;border-radius:10px;padding:12px;text-align:center}
     .feat-box .ficon{font-size:18px;margin-bottom:3px}
-    .feat-box .fval{font-size:14px;font-weight:600;color:#111}
+    .feat-box .fval{font-size:13px;font-weight:600;color:#111}
     .feat-box .flbl{font-size:10px;color:#999;text-transform:uppercase;letter-spacing:1px}
+    .sec-hdr{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#111;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #e8e8e8}
+    .desc-txt{font-size:14px;color:#555;line-height:1.7;margin-bottom:22px}
+    .detail-map-wrap{margin-bottom:22px}
+    #detail-map{height:200px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e8}
  
-    .sec-hdr{
-      font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;
-      color:#111;margin-bottom:10px;padding-bottom:8px;
-      border-bottom:1px solid #e8e8e8;
-    }
-    .desc-txt{font-size:14px;color:#555;line-height:1.7;margin-bottom:24px}
- 
-    /* Mapa detalle */
-    .detail-map-wrap{margin-bottom:24px}
-    #detail-map{height:220px;border-radius:12px;overflow:hidden;border:1px solid #e8e8e8}
- 
-    /* Contact card */
-    .contact-card{
-      background:#fff;border:1px solid #e8e8e8;border-radius:14px;
-      padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.07);
-      position:sticky;top:80px;
-    }
+    /* CONTACT CARD */
+    .contact-card{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:22px;box-shadow:0 4px 20px rgba(0,0,0,0.07);position:sticky;top:76px}
     .cc-price-lbl{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:4px}
-    .cc-price{
-      font-family:'Cormorant Garamond',serif;
-      font-size:30px;font-weight:700;color:#111;line-height:1;
-    }
-    .cc-price-sub{font-size:12px;color:#bbb;margin-top:2px;margin-bottom:18px}
-    .cc-divider{border:none;border-top:1px solid #ececec;margin:14px 0}
+    .cc-price{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:#111;line-height:1}
+    .cc-price-sub{font-size:12px;color:#bbb;margin-top:2px;margin-bottom:16px}
+    .cc-divider{border:none;border-top:1px solid #ececec;margin:12px 0}
     .cc-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}
     .cc-row .lbl{color:#888}
     .cc-row .val{font-weight:600;color:#111}
-    .cc-btn-wa{
-      width:100%;padding:14px;border-radius:10px;border:none;
-      background:#25D366;color:#fff;
-      font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;
-      display:flex;align-items:center;justify-content:center;gap:10px;
-      cursor:pointer;margin-top:18px;
-      transition:background .2s,transform .15s;
-      box-shadow:0 4px 14px rgba(37,211,102,0.3);
-    }
+    .cc-btn-wa{width:100%;padding:14px;border-radius:10px;border:none;background:#25D366;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;margin-top:16px;transition:background .2s,transform .15s;box-shadow:0 4px 14px rgba(37,211,102,0.3)}
     .cc-btn-wa:hover{background:#22c55e;transform:translateY(-1px)}
     .cc-btn-wa img{width:20px}
-    .cc-agent{
-      display:flex;align-items:center;gap:10px;
-      margin-top:16px;padding-top:16px;border-top:1px solid #ececec;
-    }
-    .cc-avatar{
-      width:40px;height:40px;border-radius:50%;
-      background:#0a0a0a;display:flex;align-items:center;justify-content:center;
-      font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#c9a96e;
-      flex-shrink:0;
-    }
+    .cc-agent{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid #ececec}
+    .cc-avatar{width:40px;height:40px;border-radius:50%;background:#0a0a0a;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#c9a96e;flex-shrink:0}
     .cc-agent-name{font-size:13px;font-weight:600;color:#111}
     .cc-agent-role{font-size:11px;color:#999}
- 
-    /* Floating WA on detail page */
-    .wa-float-detail{
-      position:fixed;bottom:20px;right:20px;
-      width:56px;height:56px;border-radius:50%;
-      background:#25D366;border:none;
-      display:flex;align-items:center;justify-content:center;
-      cursor:pointer;z-index:9999;
-      box-shadow:0 6px 20px rgba(0,0,0,0.2);
-      transition:transform .2s;
-    }
+    .wa-float-detail{position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:#25D366;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9999;box-shadow:0 6px 20px rgba(0,0,0,0.2);transition:transform .2s}
     .wa-float-detail:hover{transform:scale(1.08)}
     .wa-float-detail img{width:26px}
  
+    /* RESPONSIVE DETALLE */
     @media(max-width:800px){
-      .gallery-grid{grid-template-columns:1fr;max-height:none}
-      .gallery-thumbs{flex-direction:row;padding:0 5px 5px;overflow-x:auto;overflow-y:hidden}
-      .gallery-thumb{width:70px;height:55px;flex-shrink:0}
       .detail-body{grid-template-columns:1fr}
       .contact-card{position:static}
-      .feat-row{grid-template-columns:repeat(3,1fr)}
+      .gallery-main-img{max-height:70vh;min-height:180px}
+      .gthumb{width:58px;height:44px}
+      .gallery-arrow{width:36px;height:36px;font-size:16px}
     }
+    @media(max-width:480px){
+      .gallery-main-img{max-height:60vh;min-height:160px}
+      .detail-wrap{padding:12px 12px 80px}
+      .feat-row{grid-template-columns:repeat(3,1fr);gap:6px}
+      .feat-box{padding:9px 6px}
+      .feat-box .fval{font-size:12px}
+    }
+ 
+    /* ADMIN */
+    .admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;display:none;align-items:center;justify-content:center;padding:16px}
+    .admin-overlay.open{display:flex}
+    .admin-modal{background:#fff;border-radius:16px;width:100%;max-width:620px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 70px rgba(0,0,0,0.35)}
+    .admin-header{padding:18px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ececec}
+    .admin-header-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#111}
+    .admin-close{border:none;background:none;font-size:20px;cursor:pointer;color:#888;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .15s}
+    .admin-close:hover{background:#f0f0f0}
+    .admin-body{padding:20px 24px 28px}
+    .admin-tabs{display:flex;border-bottom:2px solid #ececec;margin-bottom:20px}
+    .admin-tab{padding:9px 18px;border:none;background:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#888;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+    .admin-tab.active{color:#111;border-bottom-color:#111}
+    .admin-panel{display:none}
+    .admin-panel.active{display:block}
+    .admin-field{margin-bottom:14px}
+    .admin-field label{display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#888;margin-bottom:5px}
+    .admin-field input,.admin-field select,.admin-field textarea{width:100%;padding:9px 12px;border-radius:8px;border:1px solid #ddd;font-family:'Outfit',sans-serif;font-size:13px;color:#111;outline:none;transition:border .15s;background:#fafafa}
+    .admin-field input:focus,.admin-field select:focus,.admin-field textarea:focus{border-color:#888;background:#fff}
+    .admin-field textarea{resize:vertical;min-height:75px}
+    .admin-row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .admin-upload-label{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:7px;border:1px dashed #bbb;background:#fafafa;cursor:pointer;font-family:'Outfit',sans-serif;font-size:12px;color:#555;transition:all .15s;margin-top:4px}
+    .admin-upload-label:hover{border-color:#888;background:#f0f0f0}
+    .imgs-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .img-thumb-wrap{position:relative;width:72px;height:56px;border-radius:7px;overflow:hidden;border:1px solid #ddd}
+    .img-thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+    .img-thumb-remove{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0}
+    .admin-save-btn{width:100%;padding:13px;border-radius:9px;border:none;background:#0a0a0a;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;transition:background .2s}
+    .admin-save-btn:hover{background:#333}
+    .admin-msg{padding:8px 12px;border-radius:7px;font-size:13px;margin-bottom:12px;display:none}
+    .admin-msg.ok{background:#d4edda;color:#155724;display:block}
+    .admin-msg.err{background:#f8d7da;color:#721c24;display:block}
+    .admin-list-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f0f0}
+    .admin-list-item:last-child{border-bottom:none}
+    .ali-thumb{width:52px;height:42px;border-radius:6px;object-fit:cover;background:#eee;flex-shrink:0}
+    .ali-thumb-empty{width:52px;height:42px;border-radius:6px;background:#eee;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+    .ali-info{flex:1;min-width:0}
+    .ali-name{font-size:13px;font-weight:600;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .ali-meta{font-size:11px;color:#999;margin-top:1px}
+    .ali-btns{display:flex;gap:6px;flex-shrink:0}
+    .btn-edit-p{padding:5px 10px;border-radius:5px;border:1px solid #ddd;background:#fff;font-size:11px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s}
+    .btn-edit-p:hover{background:#111;color:#fff;border-color:#111}
+    .btn-del-p{padding:5px 10px;border-radius:5px;border:1px solid #ffcccc;background:#fff5f5;font-size:11px;cursor:pointer;font-family:'Outfit',sans-serif;color:#cc0000;transition:all .15s}
+    .btn-del-p:hover{background:#cc0000;color:#fff;border-color:#cc0000}
+    .empty-admin{text-align:center;padding:24px 0;color:#aaa;font-size:14px}
   </style>
 </head>
 <body>
  
-  <header>
-    <div class="logo-area">
-      <button class="hamburger" id="openMenu">☰</button>
-      <img class="logo-img" id="logoImg" src="" alt="AE Logo" />
-      <div class="logo-text">
-        AE Soluciones
-        <span>Inmobiliarias</span>
+<header>
+  <div class="logo-area">
+    <button class="hamburger" id="openMenu">☰</button>
+    <img class="logo-img" id="logoImg" src="" alt="AE"/>
+    <div class="logo-text">AE Soluciones<span>Inmobiliarias</span></div>
+  </div>
+</header>
+ 
+<div class="drawer" id="drawer">
+  <div class="drawer-logo">AE Soluciones</div>
+  <hr/>
+  <button onclick="showSection('home');setTab('todos')">🏠 Todas las propiedades</button>
+  <button onclick="showSection('home');setTab('venta')">📋 En Venta</button>
+  <button onclick="showSection('home');setTab('arriendo')">🔑 En Arriendo</button>
+  <hr/>
+  <button onclick="openAdmin()">⚙️ Administrar propiedades</button>
+  <hr/>
+  <div class="small">© 2025 AE Soluciones Inmobiliarias</div>
+</div>
+<div class="overlay" id="overlay"></div>
+ 
+<div class="hero" id="heroSection">
+  <h1 class="hero-title">Encontrá tu hogar<br>ideal</h1>
+  <p class="hero-sub">Propiedades exclusivas · Colombia</p>
+  <div class="tab-row">
+    <button class="tab-btn active" id="tab-todos" onclick="setTab('todos')">Todos</button>
+    <div class="tab-divider"></div>
+    <button class="tab-btn" id="tab-venta" onclick="setTab('venta')">Venta</button>
+    <div class="tab-divider"></div>
+    <button class="tab-btn" id="tab-arriendo" onclick="setTab('arriendo')">Arriendo</button>
+  </div>
+</div>
+ 
+<main>
+  <section id="home" class="section active">
+    <div class="filter-bar">
+      <div class="results-label">Propiedades <span id="totalCountLabel"></span></div>
+      <button class="filter-toggle-btn" id="filterToggle">⚙ Filtros</button>
+    </div>
+    <div class="filter-panel" id="filterPanel">
+      <div class="filter-grid">
+        <div class="filter-field"><label>Ubicación</label><input id="qLocation" placeholder="Ciudad o dirección"/></div>
+        <div class="filter-field"><label>Tipo</label>
+          <select id="qType"><option value="">Todos</option><option>Casa</option><option>Apartamento</option><option>Lote</option><option>Finca</option><option>Otro</option></select>
+        </div>
+        <div class="filter-field"><label>Precio mínimo</label><input id="minPrice" type="number" placeholder="ej: 100000000"/></div>
+        <div class="filter-field"><label>Precio máximo</label><input id="maxPrice" type="number" placeholder="ej: 500000000"/></div>
+        <div class="filter-field"><label>Ordenar por</label>
+          <select id="sort"><option value="new">Más recientes</option><option value="priceAsc">Precio: menor a mayor</option><option value="priceDesc">Precio: mayor a menor</option></select>
+        </div>
+      </div>
+      <button class="filter-apply" id="apply">Aplicar filtros</button>
+    </div>
+    <div class="content-grid">
+      <div class="listings" id="listings"></div>
+      <div class="map-panel">
+        <div class="map-header">
+          <div class="map-header-title">Mapa de propiedades</div>
+          <div style="font-size:12px;color:var(--gray-400)" id="mapCountLabel"></div>
+        </div>
+        <div id="map"></div>
       </div>
     </div>
-  </header>
+  </section>
+  <section id="detailSection" class="section"></section>
+</main>
  
-  <div class="drawer" id="drawer">
-    <div class="drawer-logo">AE Soluciones</div>
-    <hr/>
-    <button onclick="showSection('home'); setTab('todos')">🏠 Todas las propiedades</button>
-    <button onclick="showSection('home'); setTab('venta')">📋 En Venta</button>
-    <button onclick="showSection('home'); setTab('arriendo')">🔑 En Arriendo</button>
-    <hr/>
-    <div class="small">© 2025 AE Soluciones Inmobiliarias</div>
-  </div>
-  <div class="overlay" id="overlay"></div>
+<button class="whatsapp-float" id="globalWaBtn" onclick="contactWhatsApp()">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="28">
+</button>
  
-  <!-- HERO -->
-  <div class="hero" id="heroSection">
-    <h1 class="hero-title">Encuentra tu hogar<br>ideal</h1>
-    <p class="hero-sub">Propiedades exclusivas · Colombia</p>
-    <div class="tab-row">
-      <button class="tab-btn active" id="tab-todos" onclick="setTab('todos')">Todos</button>
-      <div class="tab-divider"></div>
-      <button class="tab-btn" id="tab-venta" onclick="setTab('venta')">Venta</button>
-      <div class="tab-divider"></div>
-      <button class="tab-btn" id="tab-arriendo" onclick="setTab('arriendo')">Arriendo</button>
+<!-- ADMIN -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-modal">
+    <div class="admin-header">
+      <div class="admin-header-title" id="adminTitle">Administrar propiedades</div>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-body">
+      <div class="admin-tabs">
+        <button class="admin-tab active" id="tabBtnList" onclick="switchTab('list')">📋 Mis propiedades</button>
+        <button class="admin-tab" id="tabBtnForm" onclick="switchTab('form')">➕ Nueva propiedad</button>
+      </div>
+      <div class="admin-panel active" id="panelList"><div id="adminList"></div></div>
+      <div class="admin-panel" id="panelForm">
+        <div class="admin-msg" id="adminMsg"></div>
+        <input type="hidden" id="editId"/>
+        <div class="admin-field"><label>Título *</label><input id="fTitle" placeholder="Ej: Casa campestre con piscina"/></div>
+        <div class="admin-row2">
+          <div class="admin-field"><label>Tipo</label>
+            <select id="fType"><option>Casa</option><option>Apartamento</option><option>Lote</option><option>Finca</option><option>Otro</option></select>
+          </div>
+          <div class="admin-field"><label>Modalidad</label>
+            <select id="fModality"><option value="venta">Venta</option><option value="arriendo">Arriendo</option></select>
+          </div>
+        </div>
+        <div class="admin-field"><label>Precio COP *</label><input id="fPrice" type="number" placeholder="Ej: 350000000"/></div>
+        <div class="admin-field"><label>Ubicación *</label><input id="fLocation" placeholder="Ej: Tabio, Cundinamarca"/></div>
+        <div class="admin-row2">
+          <div class="admin-field"><label>Latitud (mapa)</label><input id="fLat" type="number" step="any" placeholder="Ej: 4.9225"/></div>
+          <div class="admin-field"><label>Longitud (mapa)</label><input id="fLng" type="number" step="any" placeholder="Ej: -74.190"/></div>
+        </div>
+        <div class="admin-field"><label>Descripción</label><textarea id="fDesc" placeholder="Describe la propiedad..."></textarea></div>
+        <div class="admin-field">
+          <label>Fotos</label>
+          <label class="admin-upload-label">
+            📎 Subir fotos desde el dispositivo
+            <input type="file" id="fImgs" accept="image/*" multiple style="display:none" onchange="handleImgs(this)"/>
+          </label>
+          <div class="imgs-preview" id="imgsPreview"></div>
+        </div>
+        <button class="admin-save-btn" onclick="saveProp()">💾 Guardar propiedad</button>
+      </div>
     </div>
   </div>
+</div>
  
-  <main>
-    <section id="home" class="section active">
-      <div class="filter-bar">
-        <div class="results-label">
-          Propiedades <span id="totalCountLabel"></span>
-        </div>
-        <button class="filter-toggle-btn" id="filterToggle">
-          <span class="filter-icon">⚙</span> Filtros
-        </button>
-      </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  document.getElementById('logoImg').src=`data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text x="10" y="80" font-family="serif" font-size="90" font-weight="700" fill="white">Æ</text></svg>`;
  
-      <div class="filter-panel" id="filterPanel">
-        <div class="filter-grid">
-          <div class="filter-field">
-            <label>Ubicación</label>
-            <input id="qLocation" placeholder="Ciudad o dirección" />
-          </div>
-          <div class="filter-field">
-            <label>Tipo</label>
-            <select id="qType">
-              <option value="">Todos</option>
-              <option>Casa</option>
-              <option>Apartamento</option>
-              <option>Lote</option>
-              <option>Finca</option>
-              <option>Otro</option>
-            </select>
-          </div>
-          <div class="filter-field">
-            <label>Precio mínimo</label>
-            <input id="minPrice" placeholder="ej: 100000000" type="number" />
-          </div>
-          <div class="filter-field">
-            <label>Precio máximo</label>
-            <input id="maxPrice" placeholder="ej: 500000000" type="number" />
-          </div>
-          <div class="filter-field">
-            <label>Ordenar por</label>
-            <select id="sort">
-              <option value="new">Más recientes</option>
-              <option value="priceAsc">Precio: menor a mayor</option>
-              <option value="priceDesc">Precio: mayor a menor</option>
-            </select>
-          </div>
-        </div>
-        <button class="filter-apply" id="apply">Aplicar filtros</button>
-      </div>
+  const PROPS_KEY='inmobiliaria_props_v2';
+  const load=k=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch{return[]}};
+  const sv=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+  const formatCOP=n=>n?'$'+Number(n).toLocaleString('es-CO')+' COP':'—';
  
-      <div class="content-grid">
-        <div class="listings" id="listings"></div>
-        <div class="map-panel">
-          <div class="map-header">
-            <div class="map-header-title">Mapa de propiedades</div>
-            <div style="font-size:12px;color:var(--gray-400)" id="mapCountLabel"></div>
-          </div>
-          <div id="map"></div>
-        </div>
-      </div>
-    </section>
+  const drawer=document.getElementById('drawer');
+  const overlay=document.getElementById('overlay');
+  document.getElementById('openMenu').onclick=()=>{drawer.classList.add('open');overlay.classList.add('show')};
+  overlay.onclick=()=>{drawer.classList.remove('open');overlay.classList.remove('show')};
  
-    <!-- DETALLE SECTION -->
-    <section id="detailSection" class="section"></section>
-  </main>
+  function showSection(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id)?.classList.add('active');
+    drawer.classList.remove('open');overlay.classList.remove('show');
+    const isHome=id==='home';
+    document.getElementById('heroSection').style.display=isHome?'':'none';
+    document.getElementById('globalWaBtn').style.display=isHome?'flex':'none';
+    setTimeout(()=>{if(window.mapObj)mapObj.invalidateSize()},200);
+  }
  
-  <button class="whatsapp-float" id="globalWaBtn" onclick="contactWhatsApp()">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="28">
-  </button>
+  let currentTab='todos';
+  function setTab(tab){
+    currentTab=tab;
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('tab-'+tab)?.classList.add('active');
+    showSection('home');applyFilters();
+  }
  
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    const LOGO_SVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text x="10" y="80" font-family="serif" font-size="90" font-weight="700" fill="white">Æ</text></svg>`;
-    document.getElementById('logoImg').src = LOGO_SVG;
+  document.getElementById('filterToggle').onclick=()=>document.getElementById('filterPanel').classList.toggle('open');
+  document.getElementById('apply').onclick=applyFilters;
  
-    const PROPS_KEY = 'inmobiliaria_props_v2';
-    function load(key){ try{ return JSON.parse(localStorage.getItem(key)||'[]') }catch(e){ return [] } }
-    function save(key,val){ localStorage.setItem(key,JSON.stringify(val)) }
-    function formatCOP(n){ if(!n) return '—'; return '$' + Number(n).toLocaleString('es-CO') + ' COP' }
+  const mapObj=L.map('map',{zoomControl:true}).setView([4.711,-74.072],6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mapObj);
+  let markersGroup=L.layerGroup().addTo(mapObj);
  
-    // ── Drawer ──
-    const drawer = document.getElementById('drawer');
-    const overlay = document.getElementById('overlay');
-    document.getElementById('openMenu').addEventListener('click',()=>{ drawer.classList.add('open'); overlay.classList.add('show'); });
-    overlay.addEventListener('click',()=>{ drawer.classList.remove('open'); overlay.classList.remove('show'); });
- 
-    function showSection(id){
-      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-      const el = document.getElementById(id);
-      if(el) el.classList.add('active');
-      drawer.classList.remove('open'); overlay.classList.remove('show');
-      // show/hide hero and global WA btn
-      document.getElementById('heroSection').style.display = (id === 'home') ? '' : 'none';
-      document.getElementById('globalWaBtn').style.display = (id === 'home') ? 'flex' : 'none';
-      setTimeout(()=>{ if(window.mapObj) mapObj.invalidateSize(); },200);
-    }
- 
-    // ── Tabs ──
-    let currentTab = 'todos';
-    function setTab(tab){
-      currentTab = tab;
-      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-      const el = document.getElementById('tab-'+tab);
-      if(el) el.classList.add('active');
-      showSection('home');
-      applyFilters();
-    }
- 
-    // ── Filter toggle ──
-    document.getElementById('filterToggle').addEventListener('click',()=>{
-      document.getElementById('filterPanel').classList.toggle('open');
+  function renderMarkers(props){
+    markersGroup.clearLayers();
+    document.getElementById('mapCountLabel').textContent=props.filter(p=>p.lat&&p.lng).length+' ubicadas';
+    props.forEach(p=>{
+      if(!p.lat||!p.lng)return;
+      const ps=p.price>=1e9?(p.price/1e9).toFixed(1)+'B':p.price>=1e6?Math.round(p.price/1e6)+'M':formatCOP(p.price);
+      const icon=L.divIcon({className:'',html:`<div class="custom-marker">${ps}</div>`,iconAnchor:[0,28]});
+      L.marker([p.lat,p.lng],{icon}).addTo(markersGroup).on('click',()=>openPropById(p.id));
     });
-    document.getElementById('apply').addEventListener('click', applyFilters);
+  }
  
-    // ── Map (listado) ──
-    const mapObj = L.map('map',{zoomControl:true}).setView([4.7110,-74.0721],6);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mapObj);
-    let markersGroup = L.layerGroup().addTo(mapObj);
+  function renderListings(props){
+    const c=document.getElementById('listings');
+    c.innerHTML='';
+    document.getElementById('totalCountLabel').textContent='— '+props.length+' resultado'+(props.length!==1?'s':'');
+    if(!props.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon">🏡</div><p>No hay propiedades disponibles</p></div>`;return}
+    props.forEach(p=>{
+      const src=p.images?.[0]||`data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%25' height='100%25' fill='%23f3f3f3'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23aaa' font-size='14'>Sin foto</text></svg>`;
+      const m=p.modality||'venta';
+      const bc=p.sold?'badge-vendida':m==='arriendo'?'badge-arriendo':'badge-venta';
+      const bt=p.sold?'Vendida':m==='arriendo'?'Arriendo':'Venta';
+      const d=document.createElement('div');
+      d.className='prop-card';
+      d.innerHTML=`<div class="prop-img-wrap"><img class="prop-img" src="${src}" loading="lazy"/><div class="prop-badge ${bc}">${bt}</div></div>
+        <div class="prop-body">
+          <div class="prop-type">${p.type||'Propiedad'}</div>
+          <div class="prop-title">${p.title}</div>
+          <div class="prop-location">📍 ${p.location}</div>
+          <div class="prop-price">${formatCOP(p.price)}</div>
+          <button class="btn-ver" onclick="openPropById('${p.id}')">Ver detalle</button>
+        </div>`;
+      c.appendChild(d);
+    });
+  }
  
-    function renderMarkers(props){
-      markersGroup.clearLayers();
-      document.getElementById('mapCountLabel').textContent = props.filter(p=>p.lat&&p.lng).length + ' ubicadas';
-      props.forEach(p=>{
-        if(!p.lat || !p.lng) return;
-        const priceShort = p.price >= 1000000000
-          ? (p.price/1000000000).toFixed(1)+'B'
-          : p.price >= 1000000
-            ? Math.round(p.price/1000000)+'M'
-            : formatCOP(p.price);
-        const icon = L.divIcon({
-          className:'',
-          html:`<div class="custom-marker">${priceShort}</div>`,
-          iconAnchor:[0,28],
-        });
-        const marker = L.marker([p.lat,p.lng],{icon}).addTo(markersGroup);
-        marker.on('click', () => { openPropById(p.id); });
-      });
+  function applyFilters(){
+    let all=load(PROPS_KEY);
+    if(currentTab==='venta')all=all.filter(p=>!p.sold&&(p.modality||'venta')==='venta');
+    else if(currentTab==='arriendo')all=all.filter(p=>!p.sold&&p.modality==='arriendo');
+    const qL=(document.getElementById('qLocation')?.value||'').toLowerCase();
+    const qT=document.getElementById('qType')?.value||'';
+    const mn=Number(document.getElementById('minPrice')?.value||0);
+    const mx=Number(document.getElementById('maxPrice')?.value||Infinity);
+    if(qL)all=all.filter(p=>(p.location||'').toLowerCase().includes(qL)||(p.title||'').toLowerCase().includes(qL));
+    if(qT)all=all.filter(p=>p.type===qT);
+    all=all.filter(p=>Number(p.price||0)>=mn&&Number(p.price||0)<=mx);
+    const s=document.getElementById('sort')?.value;
+    if(s==='priceAsc')all.sort((a,b)=>a.price-b.price);
+    else if(s==='priceDesc')all.sort((a,b)=>b.price-a.price);
+    else all.sort((a,b)=>b.createdAt-a.createdAt);
+    renderListings(all);renderMarkers(all);
+  }
+ 
+  // WhatsApp
+  let contactPropId=null;
+  function contactWhatsApp(){
+    const prop=load(PROPS_KEY).find(p=>p.id===contactPropId);
+    const msg=`Hola, estoy interesado en esta propiedad:\n\n🏡 ${prop?.title||''}\n📍 ${prop?.location||''}\n💰 ${formatCOP(prop?.price||0)}\n\nQuiero más información.`;
+    window.open(`https://wa.me/573002685120?text=${encodeURIComponent(msg)}`,'_blank');
+  }
+ 
+  /* ══════════════════════════════════
+     GALERÍA INTELIGENTE
+     - object-fit:contain → nunca recorta
+     - Flechas ‹ › para navegar
+     - Miniaturas clicables abajo
+     - Swipe táctil en móvil
+  ══════════════════════════════════ */
+  let _galleryImgs=[];
+  let _galleryIdx=0;
+ 
+  function buildGallery(images, badgeClass, badgeText, propTitle){
+    if(!images||!images.length){
+      return `<div class="gallery-no-photo">📷 Sin fotos disponibles</div>`;
     }
  
-    // ── Render listings ──
-    function renderListings(props){
-      const container = document.getElementById('listings');
-      container.innerHTML='';
-      document.getElementById('totalCountLabel').textContent = '— ' + props.length + ' resultado' + (props.length!==1?'s':'');
-      if(!props.length){
-        container.innerHTML=`<div class="empty-state"><div class="empty-icon">🏡</div><p>No hay propiedades disponibles</p></div>`;
-        return;
+    const thumbs=images.map((img,i)=>`
+      <div class="gthumb ${i===0?'active':''}" data-idx="${i}" onclick="gotoSlide(${i})">
+        <img src="${img}" loading="lazy" alt="foto ${i+1}"/>
+      </div>`).join('');
+ 
+    const showArrows=images.length>1;
+    const arrowPrev=showArrows?`<button class="gallery-arrow prev" id="gArrowPrev" onclick="gotoSlide(_galleryIdx-1)">&#8249;</button>`:'';
+    const arrowNext=showArrows?`<button class="gallery-arrow next" id="gArrowNext" onclick="gotoSlide(_galleryIdx+1)">&#8250;</button>`:'';
+    const counter=images.length>1?`<div class="gallery-counter" id="gCounter">1 / ${images.length}</div>`:'';
+    const thumbRow=images.length>1?`<div class="gallery-thumbs-row" id="gThumbsRow">${thumbs}</div>`:'';
+ 
+    return `
+      <div class="gallery-container" id="galleryContainer">
+        <div class="gallery-badge ${badgeClass}">${badgeText}</div>
+        ${arrowPrev}
+        ${arrowNext}
+        ${counter}
+        <img class="gallery-main-img" id="gMainImg" src="${images[0]}" alt="${propTitle}" loading="eager"/>
+      </div>
+      ${thumbRow}`;
+  }
+ 
+  window.gotoSlide=function(idx){
+    if(!_galleryImgs.length)return;
+    idx=(_galleryImgs.length+idx)%_galleryImgs.length; // wrap
+    _galleryIdx=idx;
+ 
+    // Cambiar foto principal con fade
+    const mainImg=document.getElementById('gMainImg');
+    if(mainImg){
+      mainImg.style.opacity='0';
+      setTimeout(()=>{
+        mainImg.src=_galleryImgs[idx];
+        mainImg.style.opacity='1';
+      },120);
+    }
+ 
+    // Actualizar miniaturas
+    document.querySelectorAll('.gthumb').forEach((t,i)=>{
+      t.classList.toggle('active',i===idx);
+    });
+ 
+    // Scroll miniatura activa al centro
+    const activeThumb=document.querySelector(`.gthumb[data-idx="${idx}"]`);
+    if(activeThumb){
+      activeThumb.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    }
+ 
+    // Contador
+    const counter=document.getElementById('gCounter');
+    if(counter) counter.textContent=`${idx+1} / ${_galleryImgs.length}`;
+  };
+ 
+  // Swipe táctil
+  function addSwipeSupport(el){
+    if(!el)return;
+    let startX=0;
+    el.addEventListener('touchstart',e=>{startX=e.touches[0].clientX},{passive:true});
+    el.addEventListener('touchend',e=>{
+      const diff=startX-e.changedTouches[0].clientX;
+      if(Math.abs(diff)>40){
+        diff>0?gotoSlide(_galleryIdx+1):gotoSlide(_galleryIdx-1);
       }
-      props.forEach(p=>{
-        const div = document.createElement('div');
-        div.className='prop-card';
-        const imgsrc = p.images && p.images[0]
-          ? p.images[0]
-          : `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%25' height='100%25' fill='%23f3f3f3'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23aaa' font-size='14'>Sin foto</text></svg>`;
-        const modality = p.modality || 'venta';
-        const badgeClass = p.sold ? 'badge-vendida' : (modality === 'arriendo' ? 'badge-arriendo' : 'badge-venta');
-        const badgeText = p.sold ? 'Vendida' : (modality === 'arriendo' ? 'Arriendo' : 'Venta');
-        div.innerHTML=`
-          <div class="prop-img-wrap">
-            <img class="prop-img" src="${imgsrc}" alt="${p.title}" loading="lazy"/>
-            <div class="prop-badge ${badgeClass}">${badgeText}</div>
-          </div>
-          <div class="prop-body">
-            <div class="prop-type">${p.type||'Propiedad'}</div>
-            <div class="prop-title">${p.title}</div>
-            <div class="prop-location">📍 ${p.location}</div>
-            <div class="prop-price">${formatCOP(p.price)}</div>
-            <div class="prop-actions">
-              <button class="btn-ver" style="flex:1" onclick="openPropById('${p.id}')">Ver detalle</button>
-            </div>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-    }
+    },{passive:true});
+  }
  
-    // ── Filters ──
-    function applyFilters(){
-      let all = load(PROPS_KEY);
-      if(currentTab === 'venta') all = all.filter(p=>!p.sold && (p.modality||'venta')==='venta');
-      else if(currentTab === 'arriendo') all = all.filter(p=>!p.sold && p.modality==='arriendo');
-      const qLoc = (document.getElementById('qLocation')?.value||'').toLowerCase();
-      const qType = document.getElementById('qType')?.value||'';
-      const minP = Number(document.getElementById('minPrice')?.value||0);
-      const maxP = Number(document.getElementById('maxPrice')?.value||Infinity);
-      if(qLoc) all = all.filter(p=>(p.location||'').toLowerCase().includes(qLoc)||(p.title||'').toLowerCase().includes(qLoc));
-      if(qType) all = all.filter(p=>p.type===qType);
-      all = all.filter(p=>Number(p.price||0)>=minP && Number(p.price||0)<=maxP);
-      const s = document.getElementById('sort')?.value;
-      if(s==='priceAsc') all.sort((a,b)=>a.price-b.price);
-      else if(s==='priceDesc') all.sort((a,b)=>b.price-a.price);
-      else all.sort((a,b)=>b.createdAt-a.createdAt);
-      renderListings(all);
-      renderMarkers(all);
-    }
+  // DETALLE
+  function openPropById(id){
+    const p=load(PROPS_KEY).find(x=>x.id===id);
+    if(!p)return;
+    contactPropId=p.id;
+    const m=p.modality||'venta';
+    const bc=p.sold?'':(m==='arriendo'?'gb-arriendo':'gb-venta');
+    const bt=p.sold?'Vendida':(m==='arriendo'?'Arriendo':'Venta');
  
-    // ── WhatsApp ──
-    let contactPropId = null;
+    _galleryImgs=p.images?.length?p.images:[];
+    _galleryIdx=0;
  
-    function contactWhatsApp(){
-      const props = load(PROPS_KEY);
-      const prop = props.find(p => p.id === contactPropId);
-      const mensaje = `Hola, estoy interesado en esta propiedad:\n\n🏡 ${prop?.title || ''}\n📍 ${prop?.location || ''}\n💰 ${formatCOP(prop?.price || 0)}\n\nQuiero más información.`;
-      const url = `https://wa.me/573166900449?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, '_blank');
-    }
+    const galleryHTML=buildGallery(_galleryImgs,bc,bt,p.title);
+    const mapHtml=(p.lat&&p.lng)?`<div class="detail-map-wrap"><div class="sec-hdr">Ubicación y lugares de interés</div><div id="detail-map"></div></div>`:'';
  
-    // ── DETALLE DE PROPIEDAD (estilo Oikos) ──
-    function openPropById(id){
-      const props = load(PROPS_KEY);
-      const p = props.find(x => x.id === id);
-      if(!p) return;
- 
-      contactPropId = p.id;
- 
-      const modality = p.modality || 'venta';
-      const badgeClass = p.sold ? '' : (modality === 'arriendo' ? 'gb-arriendo' : 'gb-venta');
-      const badgeText = p.sold ? 'Vendida' : (modality === 'arriendo' ? 'Arriendo' : 'Venta');
-      const images = (p.images && p.images.length) ? p.images : [];
- 
-      // Build gallery HTML
-      let galleryHTML = '';
-      if(images.length > 0){
-        const thumbsHTML = images.map((img, i) => `
-          <div class="gallery-thumb ${i===0?'active':''}" onclick="detailChangePhoto(${i}, this, ${JSON.stringify(images).replace(/"/g,'&quot;')})">
-            <img src="${img}" loading="lazy"/>
-          </div>
-        `).join('');
- 
-        galleryHTML = `
-          <div class="gallery-grid">
-            <div class="gallery-main">
-              <img id="detailMainPhoto" src="${images[0]}" alt="${p.title}"/>
-              <div class="gallery-badge ${badgeClass}">${badgeText}</div>
-            </div>
-            ${images.length > 1 ? `<div class="gallery-thumbs">${thumbsHTML}</div>` : ''}
-          </div>
-        `;
-      } else {
-        galleryHTML = `<div class="gallery-no-photo">📷 Sin fotos disponibles</div>`;
-      }
- 
-      // Map HTML
-      const mapHTML = (p.lat && p.lng) ? `
-        <div class="detail-map-wrap">
-          <div class="sec-hdr">Ubicación y lugares de interés</div>
-          <div id="detail-map"></div>
+    document.getElementById('detailSection').innerHTML=`
+      <div class="detail-page">
+        <div class="detail-topbar">
+          <button class="detail-back" onclick="goBack()">← Volver</button>
+          <div class="detail-topbar-title">${p.title}</div>
         </div>
-      ` : '';
- 
-      const detailSection = document.getElementById('detailSection');
-      detailSection.innerHTML = `
-        <div class="detail-page">
- 
-          <!-- Topbar -->
-          <div class="detail-topbar">
-            <button class="detail-back" onclick="goBackToList()">← Volver</button>
-            <div class="detail-topbar-title">${p.title}</div>
-          </div>
- 
-          <div class="detail-wrap">
- 
-            <!-- Galería -->
-            ${galleryHTML}
- 
-            <!-- Cuerpo -->
-            <div class="detail-body">
- 
-              <!-- Columna izquierda -->
-              <div class="detail-left">
-                <div class="prop-tag2">${p.type||'Propiedad'} · ${p.location}</div>
-                <h1 class="prop-name2">${p.title}</h1>
-                <div class="prop-addr2">
-                  📍 ${p.location}
-                </div>
- 
-                <!-- Features rápidos -->
-                <div class="feat-row">
-                  <div class="feat-box">
-                    <div class="ficon">💰</div>
-                    <div class="fval">${modality === 'arriendo' ? 'Arriendo' : 'Venta'}</div>
-                    <div class="flbl">Modalidad</div>
-                  </div>
-                  <div class="feat-box">
-                    <div class="ficon">🏠</div>
-                    <div class="fval">${p.type||'—'}</div>
-                    <div class="flbl">Tipo</div>
-                  </div>
-                  <div class="feat-box">
-                    <div class="ficon">📍</div>
-                    <div class="fval">${p.location ? p.location.split(',')[0] : '—'}</div>
-                    <div class="flbl">Ciudad</div>
-                  </div>
-                </div>
- 
-                <!-- Descripción -->
-                ${p.desc ? `
-                <div class="sec-hdr">Descripción</div>
-                <p class="desc-txt">${p.desc}</p>
-                ` : ''}
- 
-                <!-- Mapa -->
-                ${mapHTML}
+        <div class="detail-wrap">
+          ${galleryHTML}
+          <div class="detail-body">
+            <div class="detail-left">
+              <div class="prop-tag2">${p.type||'Propiedad'} · ${p.location}</div>
+              <h1 class="prop-name2">${p.title}</h1>
+              <div class="prop-addr2">📍 ${p.location}</div>
+              <div class="feat-row">
+                <div class="feat-box"><div class="ficon">💰</div><div class="fval">${m==='arriendo'?'Arriendo':'Venta'}</div><div class="flbl">Modalidad</div></div>
+                <div class="feat-box"><div class="ficon">🏠</div><div class="fval">${p.type||'—'}</div><div class="flbl">Tipo</div></div>
+                <div class="feat-box"><div class="ficon">📍</div><div class="fval">${p.location?p.location.split(',')[0]:'—'}</div><div class="flbl">Ciudad</div></div>
               </div>
- 
-              <!-- Columna derecha: tarjeta contacto -->
-              <div class="contact-card">
-                <div class="cc-price-lbl">Valor ${modality === 'arriendo' ? 'arriendo' : 'venta'}</div>
-                <div class="cc-price">${formatCOP(p.price)}</div>
-                <div class="cc-price-sub">${modality === 'arriendo' ? 'Mensual' : 'Precio total negociable'}</div>
- 
-                <hr class="cc-divider"/>
- 
-                <div class="cc-row"><span class="lbl">Tipo</span><span class="val">${p.type||'—'}</span></div>
-                <div class="cc-row"><span class="lbl">Modalidad</span><span class="val">${badgeText}</span></div>
-                <div class="cc-row"><span class="lbl">Ubicación</span><span class="val">${p.location ? p.location.split(',')[0] : '—'}</span></div>
-                ${p.location && p.location.includes(',') ? `<div class="cc-row"><span class="lbl">Departamento</span><span class="val">${p.location.split(',')[1]?.trim()||'—'}</span></div>` : ''}
- 
-                <button class="cc-btn-wa" onclick="contactWhatsApp()">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>
-                  Solicitar información
-                </button>
- 
-                <div class="cc-agent">
-                  <div class="cc-avatar">AE</div>
-                  <div>
-                    <div class="cc-agent-name">AE Soluciones Inmobiliarias</div>
-                    <div class="cc-agent-role">Asesor comercial</div>
-                  </div>
-                </div>
+              ${p.desc?`<div class="sec-hdr">Descripción</div><p class="desc-txt">${p.desc}</p>`:''}
+              ${mapHtml}
+            </div>
+            <div class="contact-card">
+              <div class="cc-price-lbl">Valor ${m==='arriendo'?'arriendo':'venta'}</div>
+              <div class="cc-price">${formatCOP(p.price)}</div>
+              <div class="cc-price-sub">${m==='arriendo'?'Mensual':'Precio total negociable'}</div>
+              <hr class="cc-divider"/>
+              <div class="cc-row"><span class="lbl">Tipo</span><span class="val">${p.type||'—'}</span></div>
+              <div class="cc-row"><span class="lbl">Modalidad</span><span class="val">${bt}</span></div>
+              <div class="cc-row"><span class="lbl">Ubicación</span><span class="val">${p.location?p.location.split(',')[0]:'—'}</span></div>
+              ${p.location?.includes(',')?`<div class="cc-row"><span class="lbl">Departamento</span><span class="val">${p.location.split(',')[1]?.trim()||'—'}</span></div>`:''}
+              <button class="cc-btn-wa" onclick="contactWhatsApp()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>Solicitar información
+              </button>
+              <div class="cc-agent">
+                <div class="cc-avatar">AE</div>
+                <div><div class="cc-agent-name">AE Soluciones Inmobiliarias</div><div class="cc-agent-role">Asesor comercial</div></div>
               </div>
- 
             </div>
           </div>
- 
-          <!-- Botón flotante WhatsApp -->
-          <button class="wa-float-detail" onclick="contactWhatsApp()">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>
-          </button>
- 
         </div>
-      `;
+        <button class="wa-float-detail" onclick="contactWhatsApp()">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>
+        </button>
+      </div>`;
  
-      showSection('detailSection');
+    showSection('detailSection');
  
-      // Inicializar mapa detalle
-      if(p.lat && p.lng){
-        setTimeout(()=>{
-          const dmap = L.map('detail-map').setView([p.lat, p.lng], 15);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(dmap);
-          L.marker([p.lat, p.lng]).addTo(dmap)
-            .bindPopup(`<b>${p.title}</b><br>${p.location}`)
-            .openPopup();
-        }, 150);
-      }
+    // Swipe en galería
+    setTimeout(()=>{
+      addSwipeSupport(document.getElementById('galleryContainer'));
+    },100);
+ 
+    // Mapa
+    if(p.lat&&p.lng){
+      setTimeout(()=>{
+        const dm=L.map('detail-map').setView([p.lat,p.lng],15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(dm);
+        L.marker([p.lat,p.lng]).addTo(dm).bindPopup(`<b>${p.title}</b><br>${p.location}`).openPopup();
+      },150);
     }
+  }
  
-    // Cambiar foto en galería del detalle
-    window.detailChangePhoto = function(idx, el, images){
-      document.getElementById('detailMainPhoto').src = images[idx];
-      document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active'));
-      el.classList.add('active');
-    };
+  function goBack(){
+    showSection('home');
+    document.getElementById('heroSection').style.display='';
+    document.getElementById('globalWaBtn').style.display='flex';
+    setTimeout(()=>{if(window.mapObj)mapObj.invalidateSize()},200);
+  }
+  window.openPropById=openPropById;
  
-    function goBackToList(){
-      showSection('home');
-      document.getElementById('heroSection').style.display = '';
-      document.getElementById('globalWaBtn').style.display = 'flex';
-      setTimeout(()=>{ if(window.mapObj) mapObj.invalidateSize(); },200);
+  /* ══════════════════════
+     ADMIN
+  ══════════════════════ */
+  let adminImgs=[];
+  function openAdmin(){
+    drawer.classList.remove('open');overlay.classList.remove('show');
+    renderAdminList();switchTab('list');
+    document.getElementById('adminOverlay').classList.add('open');
+  }
+  function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');resetForm()}
+  function switchTab(tab){
+    ['list','form'].forEach(t=>{
+      document.getElementById('tabBtn'+t.charAt(0).toUpperCase()+t.slice(1)).classList.toggle('active',t===tab);
+      document.getElementById('panel'+t.charAt(0).toUpperCase()+t.slice(1)).classList.toggle('active',t===tab);
+    });
+    if(tab==='list')renderAdminList();
+  }
+  function renderAdminList(){
+    const props=load(PROPS_KEY);
+    const c=document.getElementById('adminList');
+    if(!props.length){c.innerHTML=`<div class="empty-admin">Aún no hay propiedades. ¡Agrega una!</div>`;return}
+    c.innerHTML=props.map(p=>{
+      const img=p.images?.[0];
+      const thumb=img?`<img class="ali-thumb" src="${img}"/>`:`<div class="ali-thumb-empty">🏠</div>`;
+      return `<div class="admin-list-item">${thumb}
+        <div class="ali-info"><div class="ali-name">${p.title}</div><div class="ali-meta">${formatCOP(p.price)} · ${p.location}</div></div>
+        <div class="ali-btns">
+          <button class="btn-edit-p" onclick="editProp('${p.id}')">✏️</button>
+          <button class="btn-del-p" onclick="delProp('${p.id}')">🗑</button>
+        </div></div>`;
+    }).join('');
+  }
+  function resetForm(){
+    document.getElementById('editId').value='';
+    ['fTitle','fPrice','fLocation','fLat','fLng','fDesc'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('fType').value='Casa';document.getElementById('fModality').value='venta';
+    document.getElementById('adminTitle').textContent='Administrar propiedades';
+    adminImgs=[];renderImgsPreview();
+    const m=document.getElementById('adminMsg');m.className='admin-msg';m.textContent='';
+  }
+  function editProp(id){
+    const p=load(PROPS_KEY).find(x=>x.id===id);if(!p)return;
+    resetForm();
+    document.getElementById('editId').value=p.id;
+    document.getElementById('fTitle').value=p.title||'';
+    document.getElementById('fType').value=p.type||'Casa';
+    document.getElementById('fModality').value=p.modality||'venta';
+    document.getElementById('fPrice').value=p.price||'';
+    document.getElementById('fLocation').value=p.location||'';
+    document.getElementById('fLat').value=p.lat||'';
+    document.getElementById('fLng').value=p.lng||'';
+    document.getElementById('fDesc').value=p.desc||'';
+    adminImgs=p.images?[...p.images]:[];
+    renderImgsPreview();
+    document.getElementById('adminTitle').textContent='Editando: '+p.title;
+    switchTab('form');
+  }
+  function delProp(id){
+    if(!confirm('¿Eliminar esta propiedad?'))return;
+    sv(PROPS_KEY,load(PROPS_KEY).filter(p=>p.id!==id));
+    applyFilters();renderAdminList();
+  }
+  function saveProp(){
+    const title=document.getElementById('fTitle').value.trim();
+    const price=document.getElementById('fPrice').value.trim();
+    const location=document.getElementById('fLocation').value.trim();
+    const msg=document.getElementById('adminMsg');
+    if(!title||!price||!location){msg.textContent='Completa título, precio y ubicación.';msg.className='admin-msg err';return}
+    const editId=document.getElementById('editId').value;
+    const props=load(PROPS_KEY);
+    if(editId){
+      const idx=props.findIndex(p=>p.id===editId);
+      if(idx>-1)props[idx]={...props[idx],title,type:document.getElementById('fType').value,
+        modality:document.getElementById('fModality').value,price:Number(price),location,
+        lat:parseFloat(document.getElementById('fLat').value)||null,
+        lng:parseFloat(document.getElementById('fLng').value)||null,
+        desc:document.getElementById('fDesc').value.trim(),images:[...adminImgs],updatedAt:Date.now()};
+      msg.textContent='✅ Propiedad actualizada.';
+    } else {
+      props.push({id:'p_'+Date.now(),title,type:document.getElementById('fType').value,
+        modality:document.getElementById('fModality').value,price:Number(price),location,
+        lat:parseFloat(document.getElementById('fLat').value)||null,
+        lng:parseFloat(document.getElementById('fLng').value)||null,
+        desc:document.getElementById('fDesc').value.trim(),
+        images:[...adminImgs],createdAt:Date.now(),sold:false});
+      msg.textContent='✅ Propiedad agregada.';
     }
+    msg.className='admin-msg ok';sv(PROPS_KEY,props);applyFilters();resetForm();
+    setTimeout(()=>{switchTab('list');msg.className='admin-msg';msg.textContent=''},1400);
+  }
+  function handleImgs(input){
+    Array.from(input.files).forEach(file=>{
+      const r=new FileReader();
+      r.onload=e=>{adminImgs.push(e.target.result);renderImgsPreview()};
+      r.readAsDataURL(file);
+    });
+    input.value='';
+  }
+  function renderImgsPreview(){
+    document.getElementById('imgsPreview').innerHTML=adminImgs.map((src,i)=>`
+      <div class="img-thumb-wrap"><img src="${src}"/>
+        <button class="img-thumb-remove" onclick="removeImg(${i})">✕</button>
+      </div>`).join('');
+  }
+  function removeImg(i){adminImgs.splice(i,1);renderImgsPreview()}
+  window.editProp=editProp;window.delProp=delProp;window.handleImgs=handleImgs;window.removeImg=removeImg;
  
-    window.openPropById = openPropById;
+  /* DATOS DEMO */
+  (function(){
+    if(!load(PROPS_KEY).length){
+      sv(PROPS_KEY,[
+        {id:'p1',title:'Apartamento Santa Barbara',type:'Apartamento',modality:'venta',price:332000000,
+         location:'Santa Barbara, Bogotá',lat:4.699375,lng:-74.053129,
+         images:["Imagenes/Santa Barbara/Foto Principal sa ba.jpeg",
+                 "Imagenes/Santa Barbara/Foto 1 sa ba.jpeg",
+                 "Imagenes/Santa Barbara/Foto 2 sa ba.jpeg",
+                 "Imagenes/Santa Barbara/Foto 3 sa ba.jpeg",
+                 "Imagenes/Santa Barbara/Foto 4 sa ba.jpeg",
+                 "Imagenes/Santa Barbara/Foto 5 sa ba.jpeg",
+                 "Imagenes/Santa Barbara/Foto 6 sa ba.jpeg",
+                 "Imagenes/Santa Barbara/Foto 7 sa ba.jpeg",
+                 "Imagenes/Santa Barbara/Foto 8 sa ba.jpeg"],
+         desc:'Apartamento de 49 metros, 1 habitación, 1 baño, sala comedor, cocina, ascensor, parqueadero, depósito, vigilancia 24 horas, sobre vía principal calle 116, una cuadra arriba de la autopista norte.',
+         createdAt:Date.now()-1e6,sold:false},
+        {id:'p2',title:'Apartamento El Salado Ibagué',type:'Apartamento',modality:'venta',price:160000000,
+         location:'El Salado, Ibagué',lat:4.446788,lng:-75.142829,images:[
+          "Imagenes/Santelmo Venta/Foto principal Santelmo.jpeg", "Imagenes/Santelmo Venta/Foto 1 Santelmo.jpeg", 
+          "Imagenes/Santelmo Venta/Foto 2 Santelmo.jpeg", "Imagenes/Santelmo Venta/Foto 3 Santelmo.jpeg",
+          "Imagenes/Santelmo Venta/Foto 4 Santelmo.jpeg", "Imagenes/Santelmo Venta/Foto 5 Santelmo.jpeg",
+          "Imagenes/Santelmo Venta/Foto 6 Santelmo.jpeg", "Imagenes/Santelmo Venta/Foto 7 Santelmo.jpeg",
+          "Imagenes/Santelmo Venta/Foto 8 Santelmo.jpeg"],
+         desc:'Apartamento en el conjunto San Telmo, el salado, 3 habitaciones, 2 baños, parqueadero cubierto, ascensor.',
+         createdAt:Date.now()-2e6,sold:false},
+        {id:'p3',title:'Apartamento en la Samaria',type:'Apartamento',modality:'venta',price:224000000,
+         location:'Bio Santa Cruz, Ibagué',lat:4.418772,lng:-75.169986,
+         images:['Imagenes/Bio venta/Foto principal bio.jpeg','Imagenes/Bio venta/Foto 1 bio.jpeg',
+                 'Imagenes/Bio venta/Foto 2 bio.jpeg','Imagenes/Bio venta/Foto 3 bio.jpeg',
+                 'Imagenes/Bio venta/Foto 4 bio.jpeg','Imagenes/Bio venta/Foto 5 bio.jpeg',
+                 'Imagenes/Bio venta/Foto 6 bio.jpeg','Imagenes/Bio venta/Foto 7 bio.jpeg'],
+         desc:'Espectacular apartamento en la samaria, 59 metros, totalmente terminado, 2 habitaciones, 2 baños, sala comedor, cocina. Piso 11, 1 parqueadero.',
+         createdAt:Date.now()-3e6,sold:false},
+      ]);
+    }
+    applyFilters();
+  })();
  
-    // ── DEMO DATA ──
-    (function initData(){
-      if(load(PROPS_KEY).length === 0){
-        const demo = [
-          {
-            id:'p1', title:'Casa campestre con vista al río',
-            type:'Casa', modality:'venta', price:350000000,
-            location:'Tabio, Cundinamarca', lat:4.9225, lng:-74.1900,
-            images:[
-              "https://www.rubi.com/es/blog/wp-content/uploads/2024/10/shutterstock_2478836439_11zon.jpg",
-              "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-              "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9"
-            ],
-            desc:'Hermosa casa con zona BBQ, piscina y amplio jardín. 4 habitaciones, 3 baños. Escritura lista.',
-            createdAt: Date.now()-1000000, sold:false
-          },
-          {
-            id:'p2', title:'Apartamento céntrico Bogotá',
-            type:'Apartamento', modality:'venta', price:210000000,
-            location:'Bogotá, Chapinero', lat:4.6486, lng:-74.0624,
-            images:[], desc:'2 habitaciones, 2 baños. Conjunto cerrado con vigilancia 24h. Parqueadero incluido.',
-            createdAt: Date.now()-2000000, sold:false
-          },
-          {
-            id:'p3', title:'Finca productiva Cundinamarca',
-            type:'Finca', modality:'venta', price:850000000,
-            location:'La Vega, Cundinamarca', lat:4.9972, lng:-74.3487,
-            images:[], desc:'12 hectáreas con cultivos y vivienda principal. Excelente acceso.',
-            createdAt: Date.now()-3000000, sold:false
-          },
-          {
-            id:'p4', title:'Apartamento moderno en arriendo',
-            type:'Apartamento', modality:'arriendo', price:1800000,
-            location:'Bogotá, Usaquén', lat:4.6954, lng:-74.0310,
-            images:[], desc:'Amoblado. 1 habitación estudio. Ideal profesionales. Servicios incluidos.',
-            createdAt: Date.now()-500000, sold:false
-          },
-          {
-            id:'p5', title:'Casa familiar en arriendo',
-            type:'Casa', modality:'arriendo', price:2500000,
-            location:'Chía, Cundinamarca', lat:4.8607, lng:-74.0593,
-            images:[], desc:'3 habitaciones, 2 baños, jardín. Barrio residencial tranquilo.',
-            createdAt: Date.now()-400000, sold:false
-          },
-          {
-            id:'p6', title:'Lote urbanizable Zipaquirá',
-            type:'Lote', modality:'venta', price:180000000,
-            location:'Zipaquirá, Cundinamarca', lat:5.0225, lng:-74.0013,
-            images:[], desc:'500 m². Servicios disponibles. Zona de expansión urbana.',
-            createdAt: Date.now()-600000, sold:false
-          }
-        ];
-        save(PROPS_KEY, demo);
-      }
-      applyFilters();
-    })();
- 
-    window.addEventListener('load', ()=>{ applyFilters(); });
- 
-    // ── Admin utils ──
-    window.addProperty = function(data){
-      const props = load(PROPS_KEY);
-      const prop = {
-        id: 'p_' + Date.now(),
-        title: data.title || 'Sin título',
-        type: data.type || 'Otro',
-        modality: data.modality || 'venta',
-        price: Number(data.price) || 0,
-        location: data.location || '',
-        lat: data.lat ? parseFloat(data.lat) : null,
-        lng: data.lng ? parseFloat(data.lng) : null,
-        images: data.images || [],
-        desc: data.desc || '',
-        createdAt: Date.now(),
-        sold: false
-      };
-      props.push(prop);
-      save(PROPS_KEY, props);
-      applyFilters();
-      console.log('✅ Propiedad agregada:', prop.title);
-    };
- 
-    window.deleteProperty = function(id){
-      const props = load(PROPS_KEY).filter(p=>p.id!==id);
-      save(PROPS_KEY,props);
-      applyFilters();
-      console.log('🗑 Propiedad eliminada:', id);
-    };
- 
-    window.markSold = function(id){
-      const props = load(PROPS_KEY);
-      const p = props.find(x=>x.id===id);
-      if(!p){ console.log('No encontrada'); return; }
-      p.sold=true; p.soldAt=Date.now();
-      save(PROPS_KEY,props); applyFilters();
-      console.log('✅ Marcada como vendida:', p.title);
-    };
- 
-    window.listProperties = function(){
-      const props = load(PROPS_KEY);
-      console.table(props.map(p=>({id:p.id,title:p.title,type:p.type,modality:p.modality,price:p.price,location:p.location})));
-    };
-    addProperty({
-  title: "Casa moderna Ibague",
-  type: "Casa",
-  modality: "venta",
-  price: 450000000,
-  location: "Ibague, Tolima",
-  lat: 4.418780,
-  lng: -75.170053,
-  images: [
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9",
-    "Imagenes/Imagen2.jpg"
-  ],
-  desc: "Casa de 3 habitaciones, sala amplia, jardín y parqueadero privado."
-});
- addProperty({
-  title: "Apartamento en arriendo calle 72",
-  type: "Apartamento",
-  modality: "Renta",
-  price: 310000000,
-  location: "Bogota DC",
-  lat: 4.662734,
-  lng: -74.067447,
-  images: [
-    "Imagenes/apto72.1.jpg",
-    "Imagenes/apto72.2.jpeg"
-  ],
-  desc: "Apartamento bien ubicado en la 72 que cuenta con dos habitaciones, sala de ropas y cocina amplia que conecta con la sala."
-});
-  </script>
+  window.addEventListener('load',applyFilters);
+  window.listProperties=()=>console.table(load(PROPS_KEY).map(p=>({id:p.id,title:p.title,price:p.price,location:p.location})));
+  window.markSold=id=>{const ps=load(PROPS_KEY);const p=ps.find(x=>x.id===id);if(!p)return;p.sold=true;p.soldAt=Date.now();sv(PROPS_KEY,ps);applyFilters()};
+  window.deleteProperty=id=>{sv(PROPS_KEY,load(PROPS_KEY).filter(p=>p.id!==id));applyFilters()};
+  window.addProperty=function(data){
+    const props=load(PROPS_KEY);
+    props.push({id:'p_'+Date.now(),title:data.title||'Sin título',type:data.type||'Otro',
+      modality:data.modality||'venta',price:Number(data.price)||0,location:data.location||'',
+      lat:data.lat?parseFloat(data.lat):null,lng:data.lng?parseFloat(data.lng):null,
+      images:data.images||[],desc:data.desc||'',createdAt:Date.now(),sold:false});
+    sv(PROPS_KEY,props);applyFilters();
+  };
+</script>
 </body>
 </html>
+ 
